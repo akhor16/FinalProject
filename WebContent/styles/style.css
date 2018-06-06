@@ -1,1 +1,67 @@
 /*costum styles for a webpage*/
+
+/*class for background image*/
+.bg { 
+	
+	background: linear-gradient(340deg, #ffdab9, #778899);
+
+}    
+
+
+/*white transparent background.*/
+/*used for div components*/
+.light-bg{
+
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+/*whiter and mmore transparent background class*/
+.lighter-bg{
+
+	background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+/*this class gives hover effect to a text*/
+.hover-shadow:hover{
+
+	text-shadow: 1px 1px 5px #5e5e5e;
+
+}
+
+/*this class gives hover effect to a button(or any component)*/
+.hover-button:hover{
+
+	background-color:lightgray;
+}
+
+
+
+/*this class costumizes appearance of input fields*/
+.login-input{
+
+	/*background color is fully transparent*/
+	/*and it has gray border only on the bottom*/
+	background-color: rgba(255, 255, 255, 0.0);
+	
+	border-color: gray;
+
+	box-shadow:none !important;
+	/*border:1px solid #000000  !important;*/
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
+
+	/*input field borders should not be round*/
+	border-radius: 0px;
+}
+
+/*login input becamomes bolder when focused*/
+.login-input:focus{
+
+	border-top: 1;
+	border-color: black;
+	border-left: 0;
+	border-right: 0;
+	
+}
