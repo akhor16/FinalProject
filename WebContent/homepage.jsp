@@ -78,7 +78,7 @@
       <div class = 'row justify-content-center '>
         
         <div class = 'col-sm-2'>
-          <div class = 'panel panel-default lighter-bg border rounded'>
+          <div class = 'lighter-bg border rounded'>
             
               <table class = 'table rounded'>
                 <thead class= 'text-center'>
@@ -175,10 +175,105 @@
         </div>
         
         <div class = 'col-sm-2 border'>
-          
+          <div class = 'lighter-bg border rounded mb-3'>
+            
+              <table class = 'table rounded mb-0'>
+                <thead class= 'text-center'>
+                  <tr class= 'text-center'><div class = 'text-center'><h4>My Achievments!</h4></div></tr>
+                </thead>    
+                 
+                <tbody class = ''>
+                  <tr class ='lighter-bg quizz-list-item'>
+                    <td>
+                      <h6>First Achievment</h6>
+                      <p class = 'm-0 text-secondary'>some good achievment</p>
+                    </td>
+                    
+                  </tr>
+                  <tr class = 'quizz-list-item'>
+                    <td>
+                      <h6>Second Achievment</h6>
+                      <p class = 'm-0 text-secondary'>some good achievment</p>
+                    </td>
+                  </tr>
+                  <tr class ='lighter-bg quizz-list-item'>
+                    <td>
+                      <h6>Third Achievment</h6>
+                      <p class = 'm-0 text-secondary'>some good achievment</p>
+                    </td>
+                    
+                  </tr>
+                  <tr  class = 'quizz-list-item'>
+                    <td>
+                      <h6>Fourth Achievment</h6>
+                      <p class = 'm-0 text-secondary'>some good achievment</p>
+                    </td>
+                    
+                  </tr>
+                  
+                  <tr class ='lighter-bg quizz-list-item'>
+                    <td>
+                      <h6>Fifth Achievment</h6>
+                      <p class = 'm-0 text-secondary'>some good achievment</p>
+                    </td>
+                    
+                  </tr>            
+                </tbody>
+              </table>
+              <p class = 'm-0 ml-2 achieve-label'>see full list >></p>
+            </div>
+            
+            
+          <div class = 'lighter-bg border rounded'>
+            
+              <table class = 'table rounded mb-0'>
+                <thead class= 'text-center'>
+                  <tr class= 'text-center'><div class = 'text-center'><h4>Friends Activities</h4></div></tr>
+                </thead>    
+                 
+                <tbody class = ''>
+                  <tr class ='lighter-bg quizz-list-item'>
+                    <td>
+                      <h6>Some other friend</h6>
+                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info">12</span> points in a quiz</p>
+                    </td>
+                    
+                  </tr>
+                  <tr class = 'quizz-list-item'>
+                    <td>
+                      <h6>Some other friend</h6>
+                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info">23</span> points in a quiz</p>
+                    </td>
+                  </tr>
+                  <tr class ='lighter-bg quizz-list-item'>
+                    <td>
+                      <h6>Some other friend</h6>
+                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info">234</span> points in a quiz</p>
+                    </td>
+                    
+                  </tr>
+                  <tr  class = 'quizz-list-item'>
+                    <td>
+                      <h6>Some other friend</h6>
+                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info">15</span> points in a quiz</p>
+                    </td>
+                    
+                  </tr>
+                  
+                  <tr class ='lighter-bg quizz-list-item'>
+                    <td>
+                      <h6>Some other friend</h6>
+                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info">321</span> points in a quiz</p>
+                    </td>
+                    
+                  </tr>            
+                </tbody>
+              </table>
+              
+            </div>
         
         </div>
-        
+      
       </div>
     </div>
     	
