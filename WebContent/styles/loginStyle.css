@@ -1,0 +1,139 @@
+@charset "UTF-8";
+/*costum styles for a webpage*/
+
+/*class for background image*/
+.bg { 
+	background: repeating-linear-gradient(340deg, #ffdab9, #778899);
+    
+	background-attachment: fixed;
+     /*Full height */
+    height: 100%; */
+
+    /* Center and scale the image nicely */
+   	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}    
+
+
+/*white transparent background.*/
+/*used for div components*/
+.light-bg{
+
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+/*whiter and mmore transparent background class*/
+.lighter-bg{
+
+	background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+/*this class gives hover effect to a text*/
+.hover-shadow:hover{
+
+	text-shadow: 1px 1px 5px #5e5e5e;
+
+}
+
+/*this class gives hover effect to a button(or any component)*/
+.hover-button:hover{
+
+	background-color:lightgray;
+}
+
+
+
+/*this class costumizes appearance of input fields*/
+.login-input{
+
+	/*background color is fully transparent*/
+	/*and it has gray border only on the bottom*/
+	background-color: rgba(255, 255, 255, 0.0);
+	
+	border-color: gray;
+
+	box-shadow:none !important;
+	/*border:1px solid #000000  !important;*/
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
+
+	/*input field borders should not be round*/
+	border-radius: 0px;
+}
+
+/*login input becamomes bolder when focused*/
+.login-input:focus{
+
+	border-top: 1;
+	border-color: black;
+	border-left: 0;
+	border-right: 0;
+	
+}
+
+/*adding new class for no background*/
+
+.no-bg{
+	/*this color is fully transparent as it has opacity = 0.0*/
+	background-color: rgba(255, 255, 255, 0.9) !important;
+	
+}
+
+.list{
+  color: black;
+  
+}
+
+.quizz-list-item{
+	
+	cursor: pointer;
+	
+}
+
+.quizz-list-item:hover{
+  
+  cursor: pointer;
+  text-shadow: 1px 1px 5px #5e5e5e;
+  background-color: rgba(255, 218, 185, 0.4);
+  
+}
+
+.tabs {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	margin: 1em 0 2em;
+	font-weight: 300;
+}
+
+.nav-tabs{
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.tab-content{
+   background-color:rgba(255, 255, 255, 0.3);
+	color:#2B2B2B !important;
+	padding:5px;
+	font-color :  	#000000 !important;}
+
+.nav-tabs > li > a{
+	color: #575757;
+  border: medium none;
+}
+.nav-tabs > li > a:hover{
+    border: medium none;
+    border-radius: 0;
+    color: 	#000000 !important;
+}
+
+.nav-tabs > li.active > a {
+  color:  	#000000 !important;
+  font-size: 16px;
+}
+
+
