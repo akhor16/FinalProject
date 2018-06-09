@@ -104,13 +104,17 @@
 
 .tabs {
 	position: relative;
-	width: 100%;
 	overflow: hidden;
 	margin: 1em 0 2em;
 	font-weight: 300;
+	margin: auto;
+    width: 50%;
 }
 
 .nav-tabs{
+	margin: auto;
+    width: 50%;
+ 	width: 410px;
   background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -119,20 +123,28 @@
    background-color:rgba(255, 255, 255, 0.3);
 	color:#2B2B2B !important;
 	padding:5px;
-	font-color :  	#000000 !important;}
+	font-color :  	#000000 !important;
+	width: 410px;
+	margin: auto;
+    
+    
+}
 
 .nav-tabs > li > a{
 	color: #575757;
   border: medium none;
+  width: 100%;
 }
 .nav-tabs > li > a:hover{
     border: medium none;
     border-radius: 0;
     color: 	#000000 !important;
+    width: 100%;
 }
 
 .nav-tabs > li.active > a {
   color:  	#000000 !important;
+  width: 100%;
   font-size: 16px;
 }
 
