@@ -16,6 +16,7 @@
     <style><%@include file="styles/create-quiz-style.css"%></style>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src = 'script/script.js'></script>
     <title>Create Quiz</title>
 </head>
 
