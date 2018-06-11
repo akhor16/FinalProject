@@ -1,0 +1,53 @@
+textarea {
+    resize: none;
+}
+
+.red-small{
+
+  color: red;
+  display: none;
+
+}
+
+.warning{
+
+  border-color: red;
+  color: red;
+
+}
+
+.warning::-webkit-input-placeholder{
+
+  color: red;
+  
+}
+
+.open-ended-field{
+
+  width: 70%;
+
+}
+
+.match-field{
+
+  width: 25%;
+
+}
+
+.hidden{
+
+  display: none;
+}
+
+.add-question{
+
+  cursor:pointer;
+
+}
+
+.add-question:hover{
+
+  text-shadow: 2px 2px 5px #5e5e5e;
+  background-color: rgba(255, 255, 255, 0.5);
+  
+}
