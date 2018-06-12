@@ -47,12 +47,12 @@
 				<h3>Log In</h3>
 				<form role="form" data-toggle="validator">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label> <input
+						<label for="inputEmail">Email address</label> <input
 							type="email" class="form-control" id="exampleInputEmail1"
 							aria-describedby="emailHelp" placeholder="Enter email">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label> <input
+						<label for="inputPassword">Password</label> <input
 							type="password" class="form-control" id="exampleInputPassword1"
 							placeholder="Password">
 					</div>
@@ -70,10 +70,10 @@
 
 					<h3>Sign Up</h3>
 
+					<label for="email">Name:</label>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Name</label>
-						<div class="row form-inline">
-
+						<div>
+							
 							<div class="form-group col-sm-6">
 								<input type="text" class="form-control" id="nameinput"
 									aria-describedby="emailHelp" placeholder="Enter Name">
@@ -97,18 +97,20 @@
 					<div class="form-group">
 
 						<!-- http://1000hz.github.io/bootstrap-validator/ -->
-						<label for="inputPassword" class="control-label">Password</label>
-						<div class="row form-inline">
-							<div class="form-group col-sm-6">
-								<input type="password" data-minlength="6" class="form-control"
-									id="inputPassword" placeholder="Password" required>
-								<div class="help-block">Minimum of 6 characters</div>
-							</div>
-							<div class="form-group col-sm-6">
-								<input type="password" class="form-control"
-									id="inputPasswordConfirm" data-match="#inputPassword"
-									data-match-error="Didn't Match" placeholder="Confirm" required>
-								<div class="help-block with-errors"></div>
+						<label for="passwordLabel" class="control-label">Password</label>
+						<div class="form-group">
+							<div>
+								<div class="form-group col-sm-6">
+									<input type="password" data-minlength="6" class="form-control"
+										id="registerPassword" placeholder="Password" required>
+									<div class="help-block">Minimum of 6 characters</div>
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="password" class="form-control"
+										id="registerPasswordConfirm" data-match="#inputPassword"
+										data-match-error="Didn't Match" placeholder="Confirm" required>
+									<div class="help-block with-errors"></div>
+								</div>
 							</div>
 						</div>
 					</div>
