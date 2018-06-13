@@ -16,7 +16,10 @@
     <style><%@include file="styles/create-quiz-style.css"%></style>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src = 'script/script.js'></script>
+    
+    <!-- Changed line below because javascript src = 'link' wasn't able to load on jsp file -->
+    <!-- here I use script tag and load javascript code from file directly in it. -->
+    <script type="text/javascript"><%@include file="scripts/script.js"%></script>
     <title>Create Quiz</title>
 </head>
 
