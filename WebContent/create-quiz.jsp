@@ -48,119 +48,122 @@
         <div class = 'col-sm-2 border'>asd</div>
 
         <div class = 'col-sm-8 border'>
-          <div class = 'lighter-bg border rounded col-sm-12'>
-            <h2 class = 'm-2 display-4'> Createing Quiz: </h2>
-            <div class ='row m-1'>
-              <input type="text" class="form-control light-bg login-input" placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
-              <small class = 'red-small' id = 'min-limit'>sorry, but text should contain atleast 8 albphabet letters</small>
-              <small class = 'red-small' id = 'no-text'>sorry but you should enter quiz name</small>
-
-            </div>
-
-            <div class ='row m-1'>
-              <textarea class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='textarea'></textarea>
-            </div>
-
-            <select class="form-control login-input" id="sel1" placeholder = 'Select Time'>
-              <option value = '1'>No Time Limit (Click To Choose)</option>
-              <option value = '2'>10 min</option>
-              <option value = '3'>15 min</option>
-              <option value = '4'>20 min</option>
-              <option value = '4'>30 min</option>
-              <option value = '4'>45 min</option>
-            </select>
-
-            <button type="button" class="btn btn-dark m-3" data-toggle="collapse" data-target="#demo" id = 'continue-btn'> Continue >> </button>
-            <button type="button" class="btn btn-danger m-3" data-toggle="collapse" data-target="#demo"> Cancel :( </button>
-
-          </div>
-
-          <div class = 'lighter-bg border rounded col-sm-12 mt-3'>
-            <h1 class ='display-4 m-2'> Questions:</h1>
-          </div>
-          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3' id = 'question1'>
-            <div class = 'row'>
-              <h3 class ='m-1'>Question 1:</h3>
-              <button class = 'btn btn-danger ml-auto m-1'>X</button>
-            </div>
-            <select class="form-control login-input" placeholder = 'Question Type' id = 'select'>
-              <option value = '0'>Choose Question Type</option>
-              <option value = '#multiple-choice'>Multiple Choice</option>
-              <option value = '#open-ended'>Open Ended</option>
-              <option value = '#fill-blank'>Fill In The Blank</option>
-              <option value = '#match'>Matching</option>
-            </select>
-            <textarea class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
-            <div id = 'multiple-choice' class = 'm-2 hidden'>
-              <div class="radio m-3">
-                <label><input type="radio" name="optradio"></label>
-                <input type = 'text' class = 'login-input' placeholder="Type Answer">
-              </div>
-              <div class="radio m-3">
-                <label><input type="radio" name="optradio"></label>
-                <input type = 'text' class = 'login-input' placeholder="Type Answer">
-              </div>
-              <div class="radio m-3">
-                <label><input type="radio" name="optradio"></label>
-                <input type = 'text' class = 'login-input' placeholder="Type Answer">
-              </div>
-              <div class="radio m-3">
-                <label><input type="radio" name="optradio"></label>
-                <input type = 'text' class = 'login-input' placeholder="Type Answer">
-              </div>
-            </div>
-            <div id = 'open-ended' class = 'm-2 hidden'>
-              <div id = 'answer1' class = 'mt-1'>
-                <input type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1'>
-                <button class = 'btn btn-light ml-2 minus-btn mt-2' data-toggle="tooltip" title="remove Answer" disabled> - </button>
-              </div>
-              <div id = 'answer2' class = 'mt-1 hidden'>
-                <input type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1'>
-                <button class = 'btn btn-light ml-2 minus-btn mt-2' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
-              </div>
-              <div id = 'answer3' class = 'mt-1 hidden'>
-                <input type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1'>
-                <button class = 'btn btn-light ml-2 minus-btn mt-2' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
-              </div>
-              <div class = 'mt-1' id = 'plus-btn-div'>
-                <button class = 'btn btn-dark' data-toggle="tooltip" title="Add Answer" id = 'plus-btn'>+</button>
-              </div>
-            </div>
-            <div id = 'fill-blank' class = 'hidden'>
-              <small>The Blank Words Should Be Double Parentheses.</small>
-              <small>Example: ((London)) Is The Capital of England</small>
-
-            </div>
-            <div id = 'match' class = 'hidden'>
-              <div  class = 'row'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1'>
-              </div>
-              <div  class = 'row'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1'>
-              </div>
-              <div  class = 'row'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1'>
-              </div>
-              <div  class = 'row'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1'>
-                <input type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1'>
-              </div>
-            </div>
-
-
-              
-          </div>
-          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3 add-question' id = 'add-question'>
-            <h1 class ='display-4 m-2' > New Question...</h1>
-          </div>
-
-          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
-            <button class = 'btn btn-black m-3'>Submit QUiz!</button>
-            <button class = 'btn btn-danger m-3'>Cancel lol</button>
-          </div>
+          <form action = 'CreateQuiz' method = 'POST'>
+	          <div class = 'lighter-bg border rounded col-sm-12'>
+	            <h2 class = 'm-2 display-4'> Createing Quiz: </h2>
+	            <div class ='row m-1'>
+	              <input type="text" name = 'quiz-name' class="form-control light-bg login-input" placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
+	              <small class = 'red-small' id = 'min-limit'>sorry, but text should contain atleast 8 albphabet letters</small>
+	              <small class = 'red-small' id = 'no-text'>sorry but you should enter quiz name</small>
+	
+	            </div>
+	
+	            <div class ='row m-1'>
+	              <textarea name = 'quiz-desc' class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='textarea'></textarea>
+	            </div>
+	
+	            <select name = 'time-limit' class="form-control login-input" id="sel1" placeholder = 'Select Time'>
+	              <option value = '1'>No Time Limit (Click To Choose)</option>
+	              <option value = '2'>10 min</option>
+	              <option value = '3'>15 min</option>
+	              <option value = '4'>20 min</option>
+	              <option value = '4'>30 min</option>
+	              <option value = '4'>45 min</option>
+	            </select>
+	
+	            <button type="button" class="btn btn-dark m-3" data-toggle="collapse" data-target="#demo" id = 'continue-btn'> Continue >> </button>
+	            <button type="button" class="btn btn-danger m-3" data-toggle="collapse" data-target="#demo"> Cancel :( </button>
+	
+	          </div>
+	
+	          <div class = 'lighter-bg border rounded col-sm-12 mt-3'>
+	            <h1 class ='display-4 m-2'> Questions:</h1>
+	          </div>
+	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3' id = 'question1'>
+	            <div class = 'row'>
+	              <h3 class ='m-1'>Question 1:</h3>
+	              <button class = 'btn btn-danger ml-auto m-1'>X</button>
+	            </div>
+	            <select name = 'type1' class="form-control login-input" placeholder = 'Question Type' id = 'select'>
+	              <option value = '0'>Choose Question Type</option>
+	              <option value = '#multiple-choice'>Multiple Choice</option>
+	              <option value = '#open-ended'>Open Ended</option>
+	              <option value = '#fill-blank'>Fill In The Blank</option>
+	              <option value = '#match'>Matching</option>
+	            </select>
+	            <textarea name = 'desc1' class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
+	            <div id = 'multiple-choice' class = 'm-2 hidden'>
+	              <div class="radio m-3">
+	                <label><input type="radio" name="radio1" value = 'firstOption1' disabled></label>
+	                <input name = 'firstOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	              </div>
+	              <div class="radio m-3">
+	                <label><input type="radio" name="radio1" value = 'secondOption1' disabled></label>
+	                <input name = 'secondOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	              </div>
+	              <div class="radio m-3">
+	                <label><input type="radio" name="radio1" value = 'thirdOption1' disabled></label>
+	                <input name = 'thirdOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	              </div>
+	              <div class="radio m-3">
+	                <label><input type="radio" name="radio1" value = 'fourthOption1' disabled></label>
+	                <input name = 'fourthOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	              </div>
+	            </div>
+	            <div id = 'open-ended' class = 'm-2 hidden'>
+	              <div id = 'answer1' class = 'mt-1'>
+	                <input name = 'firstAnswer1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" disabled> - </button>
+	              </div>
+	              <div id = 'answer2' class = 'mt-1 hidden'>
+	                <input name = 'secondAnswer1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
+	              </div>
+	              <div id = 'answer3' class = 'mt-1 hidden'>
+	                <input name = 'thirdAnswer1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
+	              </div>
+	              <div class = 'mt-1' id = 'plus-btn-div'>
+	                <button class = 'btn btn-dark' type = 'button' title="Add Answer" id = 'plus-btn'>+</button>
+	              </div>
+	            </div>
+	            <div id = 'fill-blank' class = 'hidden'>
+	              <small>The Blank Words Should Be Double Parentheses.</small>
+	              <small>Example: ((London)) Is The Capital of England</small>
+	
+	            </div>
+	            <div id = 'match' class = 'hidden'>
+	              <div  class = 'row'>
+	                <input name = 'm111' type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = 'm211'type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
+	              </div>
+	              <div  class = 'row'>
+	                <input name = 'm121' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = 'm221' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
+	              </div>
+	              <div  class = 'row'>
+	                <input name = 'm131' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = 'm231' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	              </div>
+	              <div  class = 'row'>
+	                <input name = 'm141' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = 'm241' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	              </div>
+	            </div>
+	
+	
+	              
+	          </div>
+	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3 add-question' id = 'add-question'>
+	            <h1 class ='display-4 m-2' > New Question...</h1>
+	          </div>
+	          <input type = 'hidden' name = 'questionNum' value = '1' id = 'questionNum'>
+	
+	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
+	            <input type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
+	            <button class = 'btn btn-danger m-3'>Cancel lol</button>
+	          </div>
+	        </form>
         </div>
         
         <div class = 'col-sm-2 border'>asd</div>

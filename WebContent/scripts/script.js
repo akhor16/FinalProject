@@ -29,7 +29,6 @@ var answer;
 
 
 
-
 $(document).ready(function(){
 
 
@@ -75,34 +74,49 @@ $(document).ready(function(){
 		var displayed =  $(this).siblings('.displayed');
 		//alert($(this).parent().attr('id'));
 		if(selectedValue == 0){
+			displayed.find('input').prop('disabled',true);
 			displayed.fadeOut();
 		}else{
 			if(displayed.length != 0){
 				displayed.removeClass('displayed');
+				displayed.find('input').prop('disabled',true);
 				displayed.fadeOut(function(){
 					displayed = $(this).siblings(selectedValue);
 					displayed.fadeIn();
 					displayed.addClass('displayed');
+					displayed.find('input').prop('disabled',false);
 				});
 			}else{
 				displayed = $(this).siblings(selectedValue);
 				displayed.fadeIn();
 				displayed.addClass('displayed');
+				displayed.find('input').prop('disabled',false);
 			}	
 
 			
 		}
 
 	});
+	
+
+	
 	var question = $('#question1').clone(true);
 	var questionNum = 1;
 	$('#add-question').click(function(){
 
-		var newQuestion = question.clone(true);;
-		$('#' + this.id).before(newQuestion);
+		var newQuestion = question.clone(true);
+		$(this).before(newQuestion);
 		questionNum++;
 		newQuestion.attr('id','#question' + questionNum);
 		newQuestion.find('h3').html('Question ' + questionNum +':');
+		newQuestion.find('[name]').each(function(){
+			
+			var name = this.name.substring(0, this.name.length-1);
+			$(this).attr('name', name + questionNum);
+			
+		});
+		$('#questionNum').attr('value',questionNum);
+		
 	});
 
 	
