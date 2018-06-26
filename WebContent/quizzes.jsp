@@ -46,27 +46,19 @@
 	<div class="container-fluid mt-3">
 		<div class='row justify-content-center '>
 			<div class="col-sm-8 border">
-
+				<% for(int i = 0; i < 2; i++) { %>
 				<div class="m-3 light-bg border rounded">
 					<div class='m-1'>
-						<h1 class='display-4'>Some News 1</h1>
-						<p>some news text or smth</p>
+					<p class = 'rtl'>
+	    				<a class='h2 notify-label mb-1 text-dark' href="#">ყველაზე მაგარი ქვიზი</a>
+						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%= "ყველაზე მაგარი ავტორი"%> </a></p>
+						<a class = 'notify-label mb-0 text-dark' href = "#">Take a Quiz >> </a> 
 						<button type="button"
 							class="btn border border-secondary hover-button">Learn
 							More >></button>
 					</div>
 				</div>
-
-				<div class="m-3 light-bg border rounded">
-					<div class='m-1'>
-						<h1 class='display-4'>Some News 1</h1>
-						<p>some news text or smth</p>
-						<button type="button"
-							class="btn border border-secondary hover-button">Learn
-							More >></button>
-					</div>
-				</div>
-
+				<% }%>
 			</div>
 
 			
