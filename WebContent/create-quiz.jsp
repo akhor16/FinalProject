@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.CreateQuizConstants"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -52,17 +53,17 @@
 	          <div class = 'lighter-bg border rounded col-sm-12'>
 	            <h2 class = 'm-2 display-4'> Createing Quiz: </h2>
 	            <div class ='row m-1'>
-	              <input type="text" name = 'quiz-name' class="form-control light-bg login-input" placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
+	              <input type="text" name = '<%=CreateQuizConstants.QUIZ_NAME%>' class="form-control light-bg login-input" placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
 	              <small class = 'red-small' id = 'min-limit'>sorry, but text should contain atleast 8 albphabet letters</small>
 	              <small class = 'red-small' id = 'no-text'>sorry but you should enter quiz name</small>
 	
 	            </div>
 	
 	            <div class ='row m-1'>
-	              <textarea name = 'quiz-desc' class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='textarea'></textarea>
+	              <textarea name = '<%=CreateQuizConstants.QUIZ_DESCRIPTION%>' class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='textarea'></textarea>
 	            </div>
 	
-	            <select name = 'time-limit' class="form-control login-input" id="sel1" placeholder = 'Select Time'>
+	            <select name = '<%=CreateQuizConstants.TIME_LIMIT%>' class="form-control login-input" id="sel1" placeholder = 'Select Time'>
 	              <option value = '1'>No Time Limit (Click To Choose)</option>
 	              <option value = '2'>10 min</option>
 	              <option value = '3'>15 min</option>
@@ -84,43 +85,43 @@
 	              <h3 class ='m-1'>Question 1:</h3>
 	              <button class = 'btn btn-danger ml-auto m-1'>X</button>
 	            </div>
-	            <select name = 'type1' class="form-control login-input" placeholder = 'Question Type' id = 'select'>
+	            <select name = '<%=CreateQuizConstants.QUESTION_TYPE%>1' class="form-control login-input" placeholder = 'Question Type' id = 'select'>
 	              <option value = '0'>Choose Question Type</option>
 	              <option value = '#multiple-choice'>Multiple Choice</option>
 	              <option value = '#open-ended'>Open Ended</option>
 	              <option value = '#fill-blank'>Fill In The Blank</option>
 	              <option value = '#match'>Matching</option>
 	            </select>
-	            <textarea name = 'desc1' class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
+	            <textarea name = '<%=CreateQuizConstants.QUESTION_TYPE%>1' class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
 	            <div id = 'multiple-choice' class = 'm-2 hidden'>
 	              <div class="radio m-3">
-	                <label><input type="radio" name="radio1" value = 'firstOption1' disabled></label>
-	                <input name = 'firstOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'firstOption1' disabled></label>
+	                <input name = '<%=CreateQuizConstants.FIRST_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 	              </div>
 	              <div class="radio m-3">
-	                <label><input type="radio" name="radio1" value = 'secondOption1' disabled></label>
-	                <input name = 'secondOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'secondOption1' disabled></label>
+	                <input name = '<%=CreateQuizConstants.SECOND_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 	              </div>
 	              <div class="radio m-3">
-	                <label><input type="radio" name="radio1" value = 'thirdOption1' disabled></label>
-	                <input name = 'thirdOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'thirdOption1' disabled></label>
+	                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 	              </div>
 	              <div class="radio m-3">
-	                <label><input type="radio" name="radio1" value = 'fourthOption1' disabled></label>
-	                <input name = 'fourthOption1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'fourthOption1' disabled></label>
+	                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 	              </div>
 	            </div>
 	            <div id = 'open-ended' class = 'm-2 hidden'>
 	              <div id = 'answer1' class = 'mt-1'>
-	                <input name = 'firstAnswer1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.FIRST_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
 	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" disabled> - </button>
 	              </div>
 	              <div id = 'answer2' class = 'mt-1 hidden'>
-	                <input name = 'secondAnswer1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.SECOND_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
 	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
 	              </div>
 	              <div id = 'answer3' class = 'mt-1 hidden'>
-	                <input name = 'thirdAnswer1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.THIRD_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
 	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
 	              </div>
 	              <div class = 'mt-1' id = 'plus-btn-div'>
@@ -134,20 +135,20 @@
 	            </div>
 	            <div id = 'match' class = 'hidden'>
 	              <div  class = 'row'>
-	                <input name = 'm111' type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = 'm211'type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>11' type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>11'type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
 	              </div>
 	              <div  class = 'row'>
-	                <input name = 'm121' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = 'm221' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>21' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>21' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
 	              </div>
 	              <div  class = 'row'>
-	                <input name = 'm131' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = 'm231' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>31' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>31' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
 	              </div>
 	              <div  class = 'row'>
-	                <input name = 'm141' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = 'm241' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>41' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>41' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
 	              </div>
 	            </div>
 	
@@ -157,7 +158,7 @@
 	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3 add-question' id = 'add-question'>
 	            <h1 class ='display-4 m-2' > New Question...</h1>
 	          </div>
-	          <input type = 'hidden' name = 'questionNum' value = '1' id = 'questionNum'>
+	          <input type = 'hidden' name = '<%=CreateQuizConstants.QUESTION_NUM %>' value = '1' id = 'questionNum'>
 	
 	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
 	            <input type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
