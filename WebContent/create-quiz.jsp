@@ -50,17 +50,17 @@
 
         <div class = 'col-sm-8 border'>
           <form action = 'CreateQuiz' method = 'POST'>
-	          <div class = 'lighter-bg border rounded col-sm-12'>
+	          <div class = 'lighter-bg border rounded col-sm-12 first-stage'>
 	            <h2 class = 'm-2 display-4'> Createing Quiz: </h2>
 	            <div class ='row m-1'>
 	              <input type="text" name = '<%=CreateQuizConstants.QUIZ_NAME%>' class="form-control light-bg login-input" placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
-	              <small class = 'red-small' id = 'min-limit'>sorry, but text should contain atleast 8 albphabet letters</small>
-	              <small class = 'red-small' id = 'no-text'>sorry but you should enter quiz name</small>
-	
+	              <small class = 'red-small' id = 'min-limit'>sorry, but you should enter longer name</small>
+	               
 	            </div>
 	
 	            <div class ='row m-1'>
-	              <textarea name = '<%=CreateQuizConstants.QUIZ_DESCRIPTION%>' class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='textarea'></textarea>
+	              <textarea name = '<%=CreateQuizConstants.QUIZ_DESCRIPTION%>' class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='quiz-desc'></textarea>
+	              <small class = 'red-small' id = 'desc-limit'>sorry but you should enter more description</small>
 	            </div>
 	
 	            <select name = '<%=CreateQuizConstants.TIME_LIMIT%>' class="form-control login-input" id="sel1" placeholder = 'Select Time'>
@@ -72,98 +72,102 @@
 	              <option value = '4'>45 min</option>
 	            </select>
 	
-	            <button type="button" class="btn btn-dark m-3" data-toggle="collapse" data-target="#demo" id = 'continue-btn'> Continue >> </button>
-	            <button type="button" class="btn btn-danger m-3" data-toggle="collapse" data-target="#demo"> Cancel :( </button>
+	            <button type="button" class="btn btn-dark m-3"  id = 'continue-btn'> Continue >> </button>
+	            <button type="button" class="btn btn-danger m-3" > Cancel :( </button>
 	
 	          </div>
-	
-	          <div class = 'lighter-bg border rounded col-sm-12 mt-3'>
-	            <h1 class ='display-4 m-2'> Questions:</h1>
-	          </div>
-	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3' id = 'question1'>
-	            <div class = 'row'>
-	              <h3 class ='m-1'>Question 1:</h3>
-	              <button class = 'btn btn-danger ml-auto m-1'>X</button>
-	            </div>
-	            <select name = '<%=CreateQuizConstants.QUESTION_TYPE%>1' class="form-control login-input" placeholder = 'Question Type' id = 'select'>
-	              <option value = '0'>Choose Question Type</option>
-	              <option value = '#multiple-choice'>Multiple Choice</option>
-	              <option value = '#open-ended'>Open Ended</option>
-	              <option value = '#fill-blank'>Fill In The Blank</option>
-	              <option value = '#match'>Matching</option>
-	            </select>
-	            <textarea name = '<%=CreateQuizConstants.QUESTION_TYPE%>1' class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
-	            <div id = 'multiple-choice' class = 'm-2 hidden'>
-	              <div class="radio m-3">
-	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'firstOption1' disabled></label>
-	                <input name = '<%=CreateQuizConstants.FIRST_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
-	              </div>
-	              <div class="radio m-3">
-	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'secondOption1' disabled></label>
-	                <input name = '<%=CreateQuizConstants.SECOND_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
-	              </div>
-	              <div class="radio m-3">
-	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'thirdOption1' disabled></label>
-	                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
-	              </div>
-	              <div class="radio m-3">
-	                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'fourthOption1' disabled></label>
-	                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
-	              </div>
-	            </div>
-	            <div id = 'open-ended' class = 'm-2 hidden'>
-	              <div id = 'answer1' class = 'mt-1'>
-	                <input name = '<%=CreateQuizConstants.FIRST_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
-	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" disabled> - </button>
-	              </div>
-	              <div id = 'answer2' class = 'mt-1 hidden'>
-	                <input name = '<%=CreateQuizConstants.SECOND_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
-	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
-	              </div>
-	              <div id = 'answer3' class = 'mt-1 hidden'>
-	                <input name = '<%=CreateQuizConstants.THIRD_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
-	                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
-	              </div>
-	              <div class = 'mt-1' id = 'plus-btn-div'>
-	                <button class = 'btn btn-dark' type = 'button' title="Add Answer" id = 'plus-btn'>+</button>
-	              </div>
-	            </div>
-	            <div id = 'fill-blank' class = 'hidden'>
-	              <small>The Blank Words Should Be Double Parentheses.</small>
-	              <small>Example: ((London)) Is The Capital of England</small>
-	
-	            </div>
-	            <div id = 'match' class = 'hidden'>
-	              <div  class = 'row'>
-	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>11' type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>11'type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
-	              </div>
-	              <div  class = 'row'>
-	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>21' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>21' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
-	              </div>
-	              <div  class = 'row'>
-	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>31' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>31' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
-	              </div>
-	              <div  class = 'row'>
-	                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>41' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
-	                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>41' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
-	              </div>
-	            </div>
-	
-	
-	              
-	          </div>
-	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3 add-question' id = 'add-question'>
-	            <h1 class ='display-4 m-2' > New Question...</h1>
-	          </div>
-	          <input type = 'hidden' name = '<%=CreateQuizConstants.QUESTION_NUM %>' value = '1' id = 'questionNum'>
-	
-	          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
-	            <input type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
-	            <button class = 'btn btn-danger m-3'>Cancel lol</button>
-	          </div>
+	          
+	          
+            <div class = 'second-stage'>
+		          <div class = 'lighter-bg border rounded col-sm-12 mt-3'>
+		            <h1 class ='display-4 m-2'> Questions:</h1>
+		          </div>
+		          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3' id = 'question'>
+		            <div class = 'row'>
+		              <h3 class ='m-1'>Question 1:</h3>
+		              <button class = 'btn btn-danger ml-auto m-1' type = 'button' id = 'x-button'>X</button>
+		            </div>
+		            <select name = '<%=CreateQuizConstants.QUESTION_TYPE%>1' class="form-control login-input" placeholder = 'Question Type' id = 'select'>
+		              <option value = '0'>Choose Question Type</option>
+		              <option value = '#multiple-choice'>Multiple Choice</option>
+		              <option value = '#open-ended'>Open Ended</option>
+		              <option value = '#fill-blank'>Fill In The Blank</option>
+		              <option value = '#match'>Matching</option>
+		            </select>
+		            <textarea name = '<%=CreateQuizConstants.QUESTION_DESCRIPTION%>1' class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
+		            <div id = 'multiple-choice' class = 'm-2 hidden'>
+		              <div class="radio m-3">
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'firstOption1' disabled></label>
+		                <input name = '<%=CreateQuizConstants.FIRST_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+		              </div>
+		              <div class="radio m-3">
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'secondOption1' disabled></label>
+		                <input name = '<%=CreateQuizConstants.SECOND_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+		              </div>
+		              <div class="radio m-3">
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'thirdOption1' disabled></label>
+		                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+		              </div>
+		              <div class="radio m-3">
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'fourthOption1' disabled></label>
+		                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+		              </div>
+		            </div>
+		            <div id = 'open-ended' class = 'm-2 hidden'>
+		              <div id = 'answer1' class = 'mt-1'>
+		                <input name = '<%=CreateQuizConstants.FIRST_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+		                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" disabled> - </button>
+		              </div>
+		              <div id = 'answer2' class = 'mt-1 hidden'>
+		                <input name = '<%=CreateQuizConstants.SECOND_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+		                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
+		              </div>
+		              <div id = 'answer3' class = 'mt-1 hidden'>
+		                <input name = '<%=CreateQuizConstants.THIRD_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+		                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
+		              </div>
+		              <div class = 'mt-1' id = 'plus-btn-div'>
+		                <button class = 'btn btn-dark' type = 'button' title="Add Answer" id = 'plus-btn'>+</button>
+		              </div>
+		            </div>
+		            <div id = 'fill-blank' class = 'hidden'>
+		              <small>The Blank Words Should Be Double Parentheses.</small>
+		              <small>Example: ((London)) Is The Capital of England</small>
+		
+		            </div>
+		            <div id = 'match' class = 'hidden'>
+		              <div  class = 'row'>
+		                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>11' type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>11'type = 'text' class = 'login-input match-field m-3' placeholder="Matching One" maxlength="100" id = 'answer-field1' disabled>
+		              </div>
+		              <div  class = 'row'>
+		                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>21' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>21' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Two" maxlength="100" id = 'answer-field1' disabled>
+		              </div>
+		              <div  class = 'row'>
+		                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>31' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>31' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+		              </div>
+		              <div  class = 'row'>
+		                <input name = '<%=CreateQuizConstants.LEFT_MATCHING %>41' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.RIGHT_MATCHING %>41' type = 'text' class = 'login-input match-field m-3' placeholder="Matching Three" maxlength="100" id = 'answer-field1' disabled>
+		              </div>
+		            </div>
+		          </div>
+		          
+		          
+		          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3 add-question' id = 'add-question'>
+		            <h1 class ='display-4 m-2' > New Question...</h1>
+		          </div>
+           
+		          <input type = 'hidden' name = '<%=CreateQuizConstants.QUESTION_NUM %>' value = '1' id = 'questionNum'>
+		
+		          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
+		            <input type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
+		            <button class = 'btn btn-danger m-3'>Cancel lol</button>
+		          </div>
+            </div>
+            	          
 	        </form>
         </div>
         
