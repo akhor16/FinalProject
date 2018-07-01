@@ -14,19 +14,19 @@ public class Quiz {
 	/**
 	 * Open ended question type number
 	 */
-	public static final Integer OPEN_ENDED_NUM = 0;
+	public static final int OPEN_ENDED_NUM = 0;
 	/**
 	 * Multi choice question type number
 	 */
-	public static final Integer MULTI_CHOICE_NUM = 1;
+	public static final int MULTI_CHOICE_NUM = 1;
 	/**
 	 * Matching question type number
 	 */
-	public static final Integer MATCHING_NUM = 2;
+	public static final int MATCHING_NUM = 2;
 	/**
 	 * Fill in question type number
 	 */
-	public static final Integer FILL_IN_NUM = 3;
+	public static final int FILL_IN_NUM = 3;
 
 	/**
 	 * Creates new Quiz Object
@@ -76,6 +76,23 @@ public class Quiz {
 	 */
 	public int getType(int index) {
 		return typeNums.get(index);
+	}
+	
+	/**
+	 * Takes question index(any type) and returns question text
+	 * @param index - question index of any type
+	 * @return question text
+	 */
+	public String getQuestionText(int index) {
+		int type = getType(index);
+		switch(type) {
+		case OPEN_ENDED_NUM: return getOpenEndedQuestionText(index);
+		case MULTI_CHOICE_NUM: return getMultiChoiceQuestionText(index);
+		case MATCHING_NUM: return getMatchingQuestionText(index);
+		case FILL_IN_NUM: return getFillInQuestionText(index);
+		}
+		return null;
+		
 	}
 
 	// Fill-In Question

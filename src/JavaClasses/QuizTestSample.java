@@ -101,5 +101,6 @@ class QuizTestSample {
 		quiz.addMultiChoiceQuestion(QUESTION_TEXT, answers, 3);
 		assertTrue(quiz.checkMultiChoiceQuestionAnswer(0, "arcerti"));
 		assertFalse(quiz.checkMultiChoiceQuestionAnswer(0, "orti"));
+		assertTrue(quiz.getQuestionText(0).equals(QUESTION_TEXT));
 	}
 }
