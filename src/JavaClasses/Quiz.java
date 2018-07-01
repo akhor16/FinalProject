@@ -72,27 +72,36 @@ public class Quiz {
 	/**
 	 * @param index
 	 *            - index of the question
-	 * @return Type number of the question
+	 * @return Type number of the question, or -1 if there is no question on given
+	 *         index
 	 */
 	public int getType(int index) {
+		if (index < 0 || index >= typeNums.size())
+			return -1;
 		return typeNums.get(index);
 	}
-	
+
 	/**
 	 * Takes question index(any type) and returns question text
-	 * @param index - question index of any type
+	 * 
+	 * @param index
+	 *            - question index of any type
 	 * @return question text
 	 */
 	public String getQuestionText(int index) {
 		int type = getType(index);
-		switch(type) {
-		case OPEN_ENDED_NUM: return getOpenEndedQuestionText(index);
-		case MULTI_CHOICE_NUM: return getMultiChoiceQuestionText(index);
-		case MATCHING_NUM: return getMatchingQuestionText(index);
-		case FILL_IN_NUM: return getFillInQuestionText(index);
+		switch (type) {
+		case OPEN_ENDED_NUM:
+			return getOpenEndedQuestionText(index);
+		case MULTI_CHOICE_NUM:
+			return getMultiChoiceQuestionText(index);
+		case MATCHING_NUM:
+			return getMatchingQuestionText(index);
+		case FILL_IN_NUM:
+			return getFillInQuestionText(index);
 		}
 		return null;
-		
+
 	}
 
 	// Fill-In Question
@@ -328,6 +337,20 @@ public class Quiz {
 		return curQuestion.checkAnswer(answer);
 	}
 
+	/**
+	 * 
+	 * @param index
+	 *            - index of the multi choice question
+	 * @return ArrayList of possible answers
+	 */
+	public ArrayList<String> getMultiChoiceQuestionPossibleAnswers(int index) {
+		MultiChoiceQuestion curQuestion = getMultiChoiceQuestion(index);
+		if (curQuestion == null) {
+			return null;
+		}
+		return curQuestion.getPossibleAnswers();
+	}
+
 	// Private instance variables
 	private int questionNum;
 	private String quizName;
@@ -419,6 +442,10 @@ public class Quiz {
 
 		public String getQuestionText() {
 			return questionText;
+		}
+
+		public ArrayList<String> getPossibleAnswers() {
+			return answers;
 		}
 	}
 
