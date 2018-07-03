@@ -57,9 +57,11 @@ textarea {
 	
 }
 
-.first-stage{
+.error-input{
 	
-	
+	background-color: rgba(255, 0, 0, 0.2);
 	
 }
+
+
 

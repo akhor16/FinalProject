@@ -136,6 +136,8 @@ function checkInput(field,checker){
 	
 }
 
+
+
 /**
  * this method is for open ended questions to have adding multiple 
  * answer choices. 2 additional answer fields are hidden at first, but
@@ -156,6 +158,9 @@ function addAnswerField(){
 	if($(this).parent().siblings('#answer3').hasClass('displayed') && $(this).parent().siblings('#answer2').hasClass('displayed')){
 		$(this).prop('disabled',true);
 	}
+	var answerNumField = $(this).parent().siblings('#answer-num');
+	var answerNum = parseInt(answerNumField.val());
+	answerNumField.attr('value',answerNum + 1);
 	
 }
 /**
@@ -168,6 +173,10 @@ function removeAnswerField(){
 	$(this).parent().fadeOut();
 	$(this).parent().parent().parent().find('#plus-btn').prop('disabled',false);
 	$(this).parent().removeClass('displayed');
+	
+	var answerNumField = $(this).parent().siblings('#answer-num');
+	var answerNum = parseInt(answerNumField.val());
+	answerNumField.attr('value',answerNum - 1);
 	
 }
 
@@ -190,6 +199,7 @@ function changeQuestionType(){
 		
 		displayed.find('input').prop('disabled',true);
 		displayed.fadeOut();
+		displayed.removeClass('displayed');
 		
 	}else{
 		//if there are some input fields displayed when user changed select menu.
@@ -213,6 +223,8 @@ function changeQuestionType(){
 			displayed.find('input').prop('disabled',false);
 		}	
 	}
+	
+	$(this).removeClass('error-input');
 	
 }
 
@@ -248,17 +260,53 @@ function addQuestion(question){
 	//cloning the question object with it's eventListeners.
 	var newQuestion = question.clone(true);
 	
-	newQuestion.css('display','none');
-	$('#add-question').before(newQuestion);//new question added before this button.
-	newQuestion.fadeIn(1000);
-	
 	questionNum++;
 	newQuestion.find('h3').html('Question ' + questionNum +':');
 	changeNameIndices(questionNum,newQuestion);
 	$('#questionNum').attr('value',questionNum);
 	
+	newQuestion.css('display','none');
+	$('#add-question').before(newQuestion);//new question added before this button.
+	newQuestion.fadeIn(1000);
+	
 }
 
+function checkNullInput(objectSet){
+	
+	var bool = false;
+	objectSet.each(function(){
+		
+		if($(this).val() == "" && $(this).is(':visible')) {
+			bool = true;
+			return;
+		}
+	});
+	if(bool) {
+		$('#null-inputs').fadeIn();
+		return false;
+		
+	}
+	$('#null-inputs').fadeOut();
+	return true;
+	
+}
+
+function checkQuestionTypes(){
+	
+	var bool = true;
+	$('select').each(function(){
+		
+		if($(this).val() == "0" && $(this).is(':visible')){
+			$(this).addClass('error-input');
+			bool = false;
+		}
+		
+	});
+	
+	return bool;
+	
+	
+}
 
 /*
  * this function is launched after the DOM elements are loaded successfully
@@ -288,7 +336,11 @@ $(document).ready(function(){
 	var question = $('#question').clone(true);//question NODE is cloned for later use.
 	$('#add-question').click(function(){addQuestion(question);});
 	
-
+	$('form').submit(function(){
+		
+		return checkNullInput($('input[type=text]')) && checkNullInput($('textarea')) && checkQuestionTypes();
+		
+	});
 
 	
 

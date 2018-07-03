@@ -97,38 +97,39 @@
 		            <textarea name = '<%=CreateQuizConstants.QUESTION_DESCRIPTION%>1' class="form-control light-bg login-input m-1" placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'></textarea>
 		            <div id = 'multiple-choice' class = 'm-2 hidden'>
 		              <div class="radio m-3">
-		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'firstOption1' disabled></label>
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = '0' disabled checked></label>
 		                <input name = '<%=CreateQuizConstants.FIRST_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 		              </div>
 		              <div class="radio m-3">
-		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'secondOption1' disabled></label>
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = '1' disabled></label>
 		                <input name = '<%=CreateQuizConstants.SECOND_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 		              </div>
 		              <div class="radio m-3">
-		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'thirdOption1' disabled></label>
-		                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = '2' disabled></label>
+		                <input name = '<%=CreateQuizConstants.THIRD_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 		              </div>
 		              <div class="radio m-3">
-		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = 'fourthOption1' disabled></label>
+		                <label><input type="radio" name="<%=CreateQuizConstants.QUESTION_RADIO%>1" value = '3' disabled></label>
 		                <input name = '<%=CreateQuizConstants.FOURTH_OPTION %>1' type = 'text' class = 'login-input' placeholder="Type Answer" disabled>
 		              </div>
 		            </div>
 		            <div id = 'open-ended' class = 'm-2 hidden'>
 		              <div id = 'answer1' class = 'mt-1'>
-		                <input name = '<%=CreateQuizConstants.FIRST_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.ANSWER %>11' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
 		                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" disabled> - </button>
 		              </div>
 		              <div id = 'answer2' class = 'mt-1 hidden'>
-		                <input name = '<%=CreateQuizConstants.SECOND_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.ANSWER %>21' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
 		                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
 		              </div>
 		              <div id = 'answer3' class = 'mt-1 hidden'>
-		                <input name = '<%=CreateQuizConstants.THIRD_ANSWER %>1' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
+		                <input name = '<%=CreateQuizConstants.ANSWER %>31' type = 'text' class = 'login-input open-ended-field' placeholder="Type Answer" maxlength="100" id = 'answer-field1' disabled>
 		                <button class = 'btn btn-light ml-2 minus-btn mt-2' type = 'button' data-toggle="tooltip" title="remove Answer" id = 'answer-btn' > - </button>
 		              </div>
 		              <div class = 'mt-1' id = 'plus-btn-div'>
 		                <button class = 'btn btn-dark' type = 'button' title="Add Answer" id = 'plus-btn'>+</button>
 		              </div>
+		              <input type = 'hidden' name = '<%=CreateQuizConstants.ANSWER_NUM %>1' value = '1' id = 'answer-num'>
 		            </div>
 		            <div id = 'fill-blank' class = 'hidden'>
 		              <small>The Blank Words Should Be Double Parentheses.</small>
@@ -163,9 +164,11 @@
 		          <input type = 'hidden' name = '<%=CreateQuizConstants.QUESTION_NUM %>' value = '1' id = 'questionNum'>
 		
 		          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
-		            <input type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
+		            <input id = 'sbm' type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
 		            <button class = 'btn btn-danger m-3'>Cancel lol</button>
+		            <small class = 'red-small' id = 'null-inputs'>You Should Fill All The Fields</small>
 		          </div>
+		          
             </div>
             	          
 	        </form>

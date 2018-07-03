@@ -14,9 +14,8 @@ public class CreateQuizConstants {
 	public static final String THIRD_OPTION = "thirdOption";
 	public static final String FOURTH_OPTION = "fourthOption";
 	
-	public static final String FIRST_ANSWER = "firstAnswer";
-	public static final String SECOND_ANSWER = "secondAnswer";
-	public static final String THIRD_ANSWER = "thirdAnswer";
+	public static final String ANSWER = "openAnswer";
+	public static final String ANSWER_NUM = "answerNum";
 	
 	public static final String LEFT_MATCHING = "m1";
 	public static final String RIGHT_MATCHING = "m2";
