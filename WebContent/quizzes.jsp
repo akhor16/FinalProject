@@ -17,7 +17,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 <!-- This webpage's costum css file -->
-<style><%@include file="styles/style.css"%></style>
+<style><%@include file="styles/loginStyle.css"%></style>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -47,26 +47,32 @@
 		<div class='row justify-content-center '>
 			<div class="col-sm-8 border">
 				<% for(int i = 0; i < 2; i++) { %>
-				<div class="m-3 light-bg border rounded">
+				<div class="m-3 light-bg border rounded"> 
 					<div class='m-1'>
 					<p class = 'rtl'>
 	    				<a class='h2 notify-label mb-1 text-dark' href="#">ყველაზე მაგარი ქვიზი</a>
 						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%= "ყველაზე მაგარი ავტორი"%> </a></p>
-						<a class = 'notify-label mb-0 text-dark' href = "#">Take a Quiz >> </a> 
-						<button type="button"
-							class="btn border border-secondary hover-button">Learn
-							More >></button>
+						<p>
+						 <div class="row">
+							  <div class="column lef">
+							 	 Question Num: <%=4 %>
+							  </div>
+							  <div class="column cen">
+							  	Duration: <%=60 %> min
+							  </div>
+							  <div class="column rig">
+							  	<a class = 'notify-label mb-0 text-dark' href = "#">Take a Quiz >> </a>
+								</div>
+							  
+						</div> 
+						</p>
+						
+						
 					</div>
 				</div>
 				<% }%>
 			</div>
-
-			
-
 		</div>
 	</div>
-
-
-
 </body>
 </html>
