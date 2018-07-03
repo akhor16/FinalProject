@@ -527,8 +527,7 @@ public class Quiz {
 				int starting = questionText.indexOf("((", pos);
 				int ending = questionText.indexOf("))", starting);
 				if (starting == -1 || ending == -1) {
-
-					this.questionText = this.questionText.concat(questionText).substring(pos);
+					this.questionText = this.questionText.concat(questionText.substring(pos));
 					break;
 				}
 				correctAnswers.add(questionText.substring(starting + 2, ending));

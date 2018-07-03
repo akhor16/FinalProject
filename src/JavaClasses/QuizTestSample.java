@@ -65,6 +65,9 @@ class QuizTestSample {
 		list.add("avtori");
 		assertTrue(quiz.checkFillInQuestionAnswer(0, list));
 		assertEquals(shownText, quiz.getFillInQuestionText(0));
+		
+		quiz.addFillInQuestion("aa ((aaa)) aa");
+		assertEquals("aa _____ aa", quiz.getFillInQuestionText(1));
 	}
 
 	// Matching question test
