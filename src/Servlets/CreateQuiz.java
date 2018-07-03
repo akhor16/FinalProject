@@ -2,12 +2,19 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import JavaClasses.CreateQuizConstants;
+import JavaClasses.Quiz;
+import JavaClasses.StrPair;
 
 /**
  * Servlet implementation class CreateQuiz
@@ -31,8 +38,6 @@ public class CreateQuiz extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		
 		
 	}
 
@@ -40,8 +45,65 @@ public class CreateQuiz extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String quizName = request.getParameter(CreateQuizConstants.QUIZ_NAME);
+		String quizDesc = request.getParameter(CreateQuizConstants.QUIZ_DESCRIPTION);
+		 
+		Quiz quiz = new Quiz(quizName, quizDesc);
+		
+		int numQuestions = Integer.parseInt(request.getParameter(CreateQuizConstants.QUESTION_NUM));
+		request.setAttribute("quiz", quiz);
+		
+		for(int i=1;i<=numQuestions;i++) {
+			
+			String questionDesc = request.getParameter(CreateQuizConstants.QUESTION_DESCRIPTION + i);
+			
+			if(request.getParameter(CreateQuizConstants.QUESTION_TYPE + i).equals("#multiple-choice")) {
+				
+				ArrayList<String> answers = new ArrayList<>();
+				answers.add(request.getParameter(CreateQuizConstants.FIRST_OPTION + i));
+				answers.add(request.getParameter(CreateQuizConstants.SECOND_OPTION + i));
+				answers.add(request.getParameter(CreateQuizConstants.THIRD_OPTION + i));
+				answers.add(request.getParameter(CreateQuizConstants.FOURTH_OPTION + i));
+				
+				int correctAnswerIndex = Integer.parseInt(request.getParameter(CreateQuizConstants.QUESTION_RADIO + i));
+				quiz.addMultiChoiceQuestion(questionDesc, answers, correctAnswerIndex);
+			}
+			if(request.getParameter(CreateQuizConstants.QUESTION_TYPE + i).equals("#open-ended")) {
+				int answerNum = Integer.parseInt((request.getParameter(CreateQuizConstants.ANSWER_NUM + i)));
+				
+				ArrayList<String> answers = new ArrayList<>();
+				for(int j=1;j<=answerNum;j++) {
+					String ans = request.getParameter(CreateQuizConstants.ANSWER + j + i);
+					answers.add(ans);
+				}
+				quiz.addOpenEndedQuestion(questionDesc, answers);
+			}
+			if(request.getParameter(CreateQuizConstants.QUESTION_TYPE + i).equals("#fill-blank")) {
+				quiz.addFillInQuestion(questionDesc);
+				System.out.println(quiz.getFillInQuestionText(i-1));
+			}
+			if(request.getParameter(CreateQuizConstants.QUESTION_TYPE + i).equals("#match")) {
+				
+				ArrayList<StrPair> correctMatches = new ArrayList<>();
+				for(int j=1;j<=4;j++) {
+					String leftMatch = request.getParameter(CreateQuizConstants.LEFT_MATCHING + j + i);
+					String rightMatch = request.getParameter(CreateQuizConstants.RIGHT_MATCHING + j + i);
+					StrPair match = new StrPair(leftMatch,rightMatch);
+					
+					correctMatches.add(match);
+				}
+				
+				quiz.addMatchingQuestion(questionDesc, correctMatches);
+			}
+			
+		}
+		
+		request.setAttribute("quiz", quiz);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("take-quiz.jsp");
+		dispatch.forward(request, response);
+		
 	}
 
 }

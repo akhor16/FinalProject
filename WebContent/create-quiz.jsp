@@ -73,7 +73,7 @@
 	            </select>
 	
 	            <button type="button" class="btn btn-dark m-3"  id = 'continue-btn'> Continue >> </button>
-	            <button type="button" class="btn btn-danger m-3" > Cancel :( </button>
+	            <button type="button" class="btn btn-danger m-3" id = 'an'> Cancel :( </button>
 	
 	          </div>
 	          

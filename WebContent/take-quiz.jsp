@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="JavaClasses.Quiz"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,70 +40,65 @@
         </li>
       </ul>
     </nav>
-
+     
+    <%Quiz quiz = (Quiz)request.getAttribute("quiz");%>  
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
         <div class = 'col-sm-2 border'>asd</div>
 
         <div class = 'col-sm-8 border'>
-          <div class = 'lighter-bg border rounded col-sm-12 mb-3'>
-            <h1 class="display-4"> Question </h1>
-            <div class ='row m-1'>
-              <div class = 'question-bg col-sm-12 rounded'>
-                <p>some  text that represents  quiz taking question</p>
-              </div>
-              <!-- regular answer field -->
-              <input type="text" name="" class ='form-control login-input m-1' placeholder="Enter Your Answer">
-              <!-- multiple choice answer field -->
-              <div class = 'col-sm-12'>
-                <div class = 'radio'>
-                  <input type = 'radio' name = 'radio'>
-                  <label>answer</label>
-                </div>
-                <div class = 'radio'>
-                  <input type = 'radio' name = 'radio'>
-                  <label>answer</label>
-                </div>
-                <div class = 'radio'>
-                  <input type = 'radio' name = 'radio'>
-                  <label>answer</label>
-                </div>
-                <div class = 'radio'>
-                  <input type = 'radio' name = 'radio'>
-                  <label>answer</label>
-                </div>
-              </div>
-              
-              <!-- matching answer field -->
-              <div class = 'col-sm-12'>
-                <div class = 'm-2'>
-                  <label class = 'mr-5'>Match One</label>
-                  <select class="login-input">
-                    <option value = '0'>Match One</option>
-                  </select>
-                </div>
-                <div class = 'm-2'>
-                  <label class = 'mr-5'>Match Two</label>
-                  <select class="login-input">
-                    <option value = '0'>Match Two</option>
-                  </select>
-                </div>
-                <div class = 'm-2 text'>
-                  <label class = 'mr-5'>Match Three</label>
-                  <select class="login-input">
-                    <option value = '0'>Match Three</option>
-                  </select>
-                </div>
-                <div class = 'm-2'>
-                  <label class = 'mr-5'>Match Four </label>
-                  <select class="login-input">
-                    <option value = '0'>Match Four</option>
-                  </select>
-                </div>
-              </div>
-
+          <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
+            <h1 class = 'text-center'><%=quiz.getQuizName() %></</h1>
+          </div>
+          <%for(int i=1;i<=quiz.getQuestionNumber();i++){ %>
+            <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
+	            <h1 class="display-4"> Question <%=i %></h1>
+	            <div class ='row m-1'>
+	              <div class = 'question-bg col-sm-12 rounded'>
+	                <p><%= quiz.getQuestionText(i-1)%></p>
+	              </div>
+	              <!-- fill in the blank field man -->
+	              <%if(quiz.getType(i-1) == Quiz.FILL_IN_NUM){ %>
+	                 <%for(int j=0;j<quiz.getFillInQuestionWordNum(i-1);j++){ %>
+	                   <input type = 'text' class = 'form-control login-input m-2' placeholder="Field No <%=j+1%>">
+	                 <%} %>
+	              <%} %>
+	              <!-- regular answer field -->
+	              <%if(quiz.getType(i-1) == Quiz.OPEN_ENDED_NUM){ %>
+                  <input type="text" name="" class ='form-control login-input m-1' placeholder="Enter Your Answer">
+	              <%} %>
+	              <!-- multiple choice answer field -->
+	              <%if(quiz.getType(i-1) == Quiz.MULTI_CHOICE_NUM){  %>
+	              <%ArrayList<String> answers = quiz.getMultiChoiceQuestionPossibleAnswers(i-1); %>
+		              <div class = 'col-sm-12'>
+		                <%for(int j=0;j<answers.size();j++){ %>
+			                <div class = 'radio'>
+			                  <input type = 'radio' name = 'radio' value = '<%=j%>'>
+			                  <label><%=answers.get(j) %></label>
+			                </div>
+		                <%} %>
+		              </div>
+	              <%} %>
+	              <!-- matching answer field -->
+	              <%if(quiz.getType(i-1) == Quiz.MATCHING_NUM){  %>
+                  <%  ArrayList<String> keys = quiz.getMatchingQuestionKeys(i-1); %>
+                  <%  ArrayList<String> values = quiz.getMatchingQuestionValues(i-1); %>
+	                <div class = 'col-sm-12'>
+		                <%for(int j=0;j<keys.size();j++){ %>
+			                <div class = 'm-2'>
+			                  <label class = 'mr-5'><%=keys.get(j) %></label>
+			                  <select class="login-input">
+                          <%for(int k=0;k<keys.size();k++){ %>
+                            <option value = '<%=k%>'><%= values.get(k)%></option>
+                          <%} %>
+			                  </select>
+			                </div>
+                    <%} %>
+		              </div>
+                <%} %>
+	            </div>
             </div>
-        </div>
+          <%} %>
 
         <div class = 'lighter-bg border rounded col-sm-12 mb-3'>
           <button class = 'btn btn-dark m-2'>Submit This Super QUiz</button>

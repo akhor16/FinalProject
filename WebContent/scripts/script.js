@@ -342,6 +342,5 @@ $(document).ready(function(){
 		
 	});
 
-	
 
 });
