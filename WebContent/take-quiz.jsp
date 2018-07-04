@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.TakeQuizConstants"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JavaClasses.Quiz"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -50,44 +51,44 @@
           <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
             <h1 class = 'text-center'><%=quiz.getQuizName() %></</h1>
           </div>
-          <%for(int i=1;i<=quiz.getQuestionNumber();i++){ %>
+          <%for(int i=0;i<quiz.getQuestionNumber();i++){ %>
             <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
-	            <h1 class="display-4"> Question <%=i %></h1>
+	            <h1 class="display-4"> Question <%=i+1 %></h1>
 	            <div class ='row m-1'>
 	              <div class = 'question-bg col-sm-12 rounded'>
-	                <p><%= quiz.getQuestionText(i-1)%></p>
+	                <p><%= quiz.getQuestionText(i)%></p>
 	              </div>
 	              <!-- fill in the blank field man -->
-	              <%if(quiz.getType(i-1) == Quiz.FILL_IN_NUM){ %>
-	                 <%for(int j=0;j<quiz.getFillInQuestionWordNum(i-1);j++){ %>
-	                   <input type = 'text' class = 'form-control login-input m-2' placeholder="Field No <%=j+1%>">
+	              <%if(quiz.getType(i) == Quiz.FILL_IN_NUM){ %>
+	                 <%for(int j=0;j<quiz.getFillInQuestionWordNum(i);j++){ %>
+	                   <input type = 'text' class = 'form-control login-input m-2' placeholder="Field No <%=j+1%>" name = "<%=TakeQuizConstants.FILL_IN_ANSWER + "" + j + "" + i%>">
 	                 <%} %>
 	              <%} %>
 	              <!-- regular answer field -->
-	              <%if(quiz.getType(i-1) == Quiz.OPEN_ENDED_NUM){ %>
-                  <input type="text" name="" class ='form-control login-input m-1' placeholder="Enter Your Answer">
+	              <%if(quiz.getType(i) == Quiz.OPEN_ENDED_NUM){ %>
+                  <input type="text" name="<%=TakeQuizConstants.REGULAR_ANSWER + "" +i %>" class ='form-control login-input m-1' placeholder="Enter Your Answer">
 	              <%} %>
 	              <!-- multiple choice answer field -->
-	              <%if(quiz.getType(i-1) == Quiz.MULTI_CHOICE_NUM){  %>
-	              <%ArrayList<String> answers = quiz.getMultiChoiceQuestionPossibleAnswers(i-1); %>
+	              <%if(quiz.getType(i) == Quiz.MULTI_CHOICE_NUM){  %>
+	              <%ArrayList<String> answers = quiz.getMultiChoiceQuestionPossibleAnswers(i); %>
 		              <div class = 'col-sm-12'>
 		                <%for(int j=0;j<answers.size();j++){ %>
 			                <div class = 'radio'>
-			                  <input type = 'radio' name = 'radio' value = '<%=j%>'>
+			                  <input type = 'radio' name = "<%=TakeQuizConstants.RADIO_ANSWER + "" + j + "" + i%>" value = '<%=j%>'>
 			                  <label><%=answers.get(j) %></label>
 			                </div>
 		                <%} %>
 		              </div>
 	              <%} %>
 	              <!-- matching answer field -->
-	              <%if(quiz.getType(i-1) == Quiz.MATCHING_NUM){  %>
-                  <%  ArrayList<String> keys = quiz.getMatchingQuestionKeys(i-1); %>
-                  <%  ArrayList<String> values = quiz.getMatchingQuestionValues(i-1); %>
+	              <%if(quiz.getType(i) == Quiz.MATCHING_NUM){  %>
+                  <%  ArrayList<String> keys = quiz.getMatchingQuestionKeys(i); %>
+                  <%  ArrayList<String> values = quiz.getMatchingQuestionValues(i); %>
 	                <div class = 'col-sm-12'>
 		                <%for(int j=0;j<keys.size();j++){ %>
 			                <div class = 'm-2'>
 			                  <label class = 'mr-5'><%=keys.get(j) %></label>
-			                  <select class="login-input">
+			                  <select class="login-input" name = "<%=TakeQuizConstants.MATCHING_ANSWER + "" + j + "" + i%>">
                           <%for(int k=0;k<keys.size();k++){ %>
                             <option value = '<%=k%>'><%= values.get(k)%></option>
                           <%} %>
