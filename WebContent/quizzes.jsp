@@ -53,14 +53,14 @@
 	    				<a class='h2 notify-label mb-1 text-dark' href="#">ყველაზე მაგარი ქვიზი</a>
 						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%= "ყველაზე მაგარი ავტორი"%> </a></p>
 						<p>
-						 <div class="row">
-							  <div class="column lef">
+						 <div class="row a">
+							  <div class="column lef a">
 							 	 Question Num: <%=4 %>
 							  </div>
-							  <div class="column cen">
+							  <div class="column cen a">
 							  	Duration: <%=60 %> min
 							  </div>
-							  <div class="column rig">
+							  <div class="column rig a">
 							  	<a class = 'notify-label mb-0 text-dark' href = "#">Take a Quiz >> </a>
 								</div>
 							  

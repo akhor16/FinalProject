@@ -160,8 +160,7 @@
     clear: both;
 }
 
-
-div {
+div.a {
     padding-left: 8px;
     padding-right: 10px;
 }
