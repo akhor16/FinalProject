@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -81,7 +82,7 @@ public class CreateQuiz extends HttpServlet {
 			}
 			if(request.getParameter(CreateQuizConstants.QUESTION_TYPE + i).equals("#fill-blank")) {
 				quiz.addFillInQuestion(questionDesc);
-				System.out.println(quiz.getFillInQuestionText(i-1));
+				
 			}
 			if(request.getParameter(CreateQuizConstants.QUESTION_TYPE + i).equals("#match")) {
 				
@@ -99,10 +100,24 @@ public class CreateQuiz extends HttpServlet {
 			
 		}
 		
-		request.setAttribute("quiz", quiz);
+		ServletContext context = request.getServletContext();
+		addToBase(quiz,context);
+		request.setAttribute("name",quiz.getQuizName());
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("take-quiz.jsp");
 		dispatch.forward(request, response);
+		
+	}
+	
+	
+	/**
+	 * This method will later add quiz to database but for now it will add this class to a servletContext
+	 * @param quiz
+	 * @param context
+	 */
+	private void addToBase(Quiz quiz, ServletContext context) {
+		
+		context.setAttribute(quiz.getQuizName(), quiz);
 		
 	}
 

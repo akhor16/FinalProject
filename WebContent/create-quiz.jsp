@@ -174,7 +174,7 @@
 	        </form>
         </div>
         
-        <div class = 'col-sm-2 border'>asd</div>
+        <div class = 'col-sm-2 border'> </div>
 
       </div>
 

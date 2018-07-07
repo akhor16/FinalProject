@@ -42,15 +42,18 @@
       </ul>
     </nav>
      
-    <%Quiz quiz = (Quiz)request.getAttribute("quiz");%>  
+    <%String quizName = (String)request.getAttribute("name"); %> 
+    <%Quiz quiz = (Quiz)request.getServletContext().getAttribute(quizName);%>  
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
         <div class = 'col-sm-2 border'>asd</div>
 
         <div class = 'col-sm-8 border'>
+          
           <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
             <h1 class = 'text-center'><%=quiz.getQuizName() %></</h1>
           </div>
+          <form>
           <%for(int i=0;i<quiz.getQuestionNumber();i++){ %>
             <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
 	            <h1 class="display-4"> Question <%=i+1 %></h1>
@@ -74,7 +77,7 @@
 		              <div class = 'col-sm-12'>
 		                <%for(int j=0;j<answers.size();j++){ %>
 			                <div class = 'radio'>
-			                  <input type = 'radio' name = "<%=TakeQuizConstants.RADIO_ANSWER + "" + j + "" + i%>" value = '<%=j%>'>
+			                  <input type = 'radio' name = '<%=TakeQuizConstants.RADIO_ANSWER + "" + i%>' value = '<%=answers.get(j)%>'>
 			                  <label><%=answers.get(j) %></label>
 			                </div>
 		                <%} %>
@@ -90,7 +93,7 @@
 			                  <label class = 'mr-5'><%=keys.get(j) %></label>
 			                  <select class="login-input" name = "<%=TakeQuizConstants.MATCHING_ANSWER + "" + j + "" + i%>">
                           <%for(int k=0;k<keys.size();k++){ %>
-                            <option value = '<%=k%>'><%= values.get(k)%></option>
+                            <option value = '<%=values.get(k)%>'><%= values.get(k)%></option>
                           <%} %>
 			                  </select>
 			                </div>
@@ -100,11 +103,15 @@
 	            </div>
             </div>
           <%} %>
-
-        <div class = 'lighter-bg border rounded col-sm-12 mb-3'>
-          <button class = 'btn btn-dark m-2'>Submit This Super QUiz</button>
-        </div>
-
+          <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
+            
+            
+            <input type = 'hidden' name = '<%=TakeQuizConstants.QUIZ_NAME %>' value = '<%=quiz.getQuizName()%>'>
+            <input type = 'button' id = 'submit' class = 'btn btn-dark' value = 'Submit This Quiz' >
+          </div>
+          </form>
+      
+          
         </div>
         <div class = 'col-sm-2 border'>asd</div>
       </div>
