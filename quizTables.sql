@@ -11,7 +11,7 @@ drop table if exists quizzes;
 create table quizzes(
 
 	quiz_id int unsigned auto_increment primary key,
-	quizname varchar(50) not null,
+	quiz_name varchar(50) not null,
 	author varchar(50) not null,
     description text
 );

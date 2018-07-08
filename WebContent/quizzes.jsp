@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="JavaClasses.QuizDatabase"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -46,11 +48,15 @@
 	<div class="container-fluid mt-3">
 		<div class='row justify-content-center '>
 			<div class="col-sm-8 border">
-				<% for(int i = 0; i < 2; i++) { %>
+			<%QuizDatabase base = new QuizDatabase();
+			ArrayList<String> names = base.getQuizNames();
+			%>
+				<% for(int i = 0; i < names.size(); i++) { %>
 				<div class="m-3 light-bg border rounded"> 
 					<div class='m-1'>
 					<p class = 'rtl'>
-	    				<a class='h2 notify-label mb-1 text-dark' href="#">ყველაზე მაგარი ქვიზი</a>
+						<%int id = base.getQuizIdByName(names.get(i)); %>
+	    				<a class='h2 notify-label mb-1 text-dark' href="<%=request.getContextPath()%>/QuizDescription?id=<%=id%>"><%=names.get(i) %></a>
 						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%= "ყველაზე მაგარი ავტორი"%> </a></p>
 						<p>
 						 <div class="row a">

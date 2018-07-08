@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.QuizDatabase"%>
 <%@page import="JavaClasses.TakeQuizConstants"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JavaClasses.Quiz"%>
@@ -42,8 +43,10 @@
       </ul>
     </nav>
      
-    <%String quizName = (String)request.getAttribute("name"); %> 
-    <%Quiz quiz = (Quiz)request.getServletContext().getAttribute(quizName);%>  
+    <%String quizId = (String)request.getAttribute("id"); %> 
+    <%QuizDatabase base = new QuizDatabase(); %>
+    <%int id = Integer.parseInt(quizId); %>
+    <%Quiz quiz = base.getQuiz(id);%>  
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
         <div class = 'col-sm-2 border'>asd</div>

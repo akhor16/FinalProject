@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import JavaClasses.Quiz;
+import JavaClasses.QuizDatabase;
 import JavaClasses.StrPair;
 import JavaClasses.TakeQuizConstants;
 
@@ -45,7 +46,8 @@ public class CheckQuiz extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		String quizName = request.getParameter(TakeQuizConstants.QUIZ_NAME + "");
-		Quiz quiz = (Quiz)request.getServletContext().getAttribute(quizName);
+		QuizDatabase base = new QuizDatabase();
+		Quiz quiz = base.getQuiz(quizName);
 		PrintWriter out = response.getWriter();
 		int points = 0;
 		for(int i=0;i<quiz.getQuestionNumber();i++) {
