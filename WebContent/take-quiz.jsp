@@ -51,7 +51,7 @@
         <div class = 'col-sm-8 border'>
           
           <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
-            <h1 class = 'text-center'><%=quiz.getQuizName() %></</h1>
+            <h1 class = 'word-wrap text-center'><%=quiz.getQuizName() %></</h1>
           </div>
           <form>
           <%for(int i=0;i<quiz.getQuestionNumber();i++){ %>
@@ -110,6 +110,10 @@
             <input type = 'button' id = 'submit' class = 'btn btn-dark' value = 'Submit This Quiz' >
           </div>
           </form>
+          <div class = 'result lighter-bg border rounded col-sm-12 mb-3 mt-3' id = 'result'>
+            <h1 class = 'display-4'>you scored points</h1>
+            <button class = 'btn form-control btn-dark'>Get Back To Quiz Page</button>
+          </div>
       
           
         </div>

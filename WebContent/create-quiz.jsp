@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.QuizDatabase"%>
 <%@page import="JavaClasses.CreateQuizConstants"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -43,7 +44,11 @@
         </li>
       </ul>
     </nav>
-
+  <%
+  QuizDatabase base = new QuizDatabase();
+  base.getQuiz("quiz number two");
+  
+  %>
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
         <div class = 'col-sm-2 border'>asd</div>

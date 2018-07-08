@@ -3,3 +3,15 @@
   background-color: rgba(255,248,231, 0.5);
 
 }
+
+.result{
+	
+	display: none;
+	
+}
+
+.word-wrap{
+	
+	word-wrap: break-word;
+	
+}
