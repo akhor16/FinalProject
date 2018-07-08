@@ -408,7 +408,7 @@ public class Quiz {
 		// Constructor
 		public OpenEndedQuestion(String questionText, ArrayList<String> correctAnswers) {
 			this.questionText = questionText;
-			this.correctAnswers = correctAnswers;
+			this.correctAnswers = new ArrayList<>(correctAnswers);
 		}
 
 		public String getQuestionText() {
@@ -429,7 +429,7 @@ public class Quiz {
 		// Constructor
 		public MultiChoiceQuestion(String questionText, ArrayList<String> answers, int correctAnswerIndex) {
 			this.questionText = questionText;
-			this.answers = answers;
+			this.answers = new ArrayList<>(answers);
 			this.correctAnswerIndex = correctAnswerIndex;
 		}
 
@@ -459,7 +459,7 @@ public class Quiz {
 		// Matching question constructor
 		public MatchingQuestion(String questionText, ArrayList<StrPair> correctMatches) {
 			this.questionText = questionText;
-			this.correctMatches = correctMatches;
+			this.correctMatches = new ArrayList<>(correctMatches);
 			Collections.sort(this.correctMatches);
 			fillKeysAndValuesLists();
 		}

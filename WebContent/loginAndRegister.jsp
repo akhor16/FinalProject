@@ -10,6 +10,7 @@
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous">
 <!-- This webpage's costum css file -->
+<link rel='stylesheet' href='styles/create-quiz-style.css'>
 <link rel='stylesheet' href='styles/loginStyle.css'>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +20,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"><%@include file="scripts/login-register-script.js"%></script>
 <title>Log In to Quiz Website</title>
 </head>
 <body class="bg">
@@ -47,22 +49,24 @@
 				<h3>Log In</h3>
 				<form role="form" data-toggle="validator">
 					<div class="form-group">
-						<label for="inputEmail">Email address</label> <input
-							type="email" class="form-control" id="exampleInputEmail1"
-							aria-describedby="emailHelp" placeholder="Enter email">
+						<label for="userNameLogin">User name</label> <input type="text"
+							class="form-control" id="userNameLogin" 
+							placeholder="Enter user name">
 					</div>
 					<div class="form-group">
-						<label for="inputPassword">Password</label> <input
-							type="password" class="form-control" id="exampleInputPassword1"
-							placeholder="Password">
+						<label for="passwordLogin">Password</label> <input type="password"
+							class="form-control" id="passwordLogin" placeholder="Password">
+					</div>
+
+					<div>
+						<small class='red-small' id='wrongLogin'>sorry but you
+							entered wrong user name or password</small>
+					</div>
+					<div>
+						<button type="button" id="loginButton"
+							class="btn border border-secondary hover-button">Log In</button>
 					</div>
 				</form>
-				<label class="remember pull-right psT"><input
-					type="checkbox" id="remember_me"
-					data-analytics="AuthPageRememberMe" data-attr1="master"> <small>Remember
-						me</small></label>
-				<button type="button"
-					class="btn border border-secondary hover-button">Log In</button>
 			</div>
 			<div id="signup" class="tab-pane fade">
 				<!--  add validator control -->
@@ -70,17 +74,17 @@
 
 					<h3>Sign Up</h3>
 
-					<label for="email">Name:</label>
+					<label for="nameRegister">Name:</label>
 					<div class="form-group">
 						<div>
-							
+
 							<div class="form-group col-sm-6">
-								<input type="text" class="form-control" id="nameinput"
-									aria-describedby="emailHelp" placeholder="Enter Name">
+								<input type="text" class="form-control" id="nameRegister"
+									placeholder="Enter Name">
 							</div>
 
 							<div class="form-group col-sm-6">
-								<input type="text" class="form-control" id="lastnameinput"
+								<input type="text" class="form-control" id="lastNameRegister"
 									placeholder="Enter Last Name">
 							</div>
 						</div>
@@ -89,9 +93,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label> <input
-							type="email" class="form-control" id="exampleInputEmail1"
-							aria-describedby="emailHelp" placeholder="Enter email">
+						<label for="userNameRegister">User name</label> <input
+							type="text" class="form-control" id="userNameRegister"
+							placeholder="Enter user name">
 					</div>
 
 					<div class="form-group">
@@ -115,10 +119,6 @@
 						</div>
 					</div>
 					<div class="clearfix msB">
-						<label class="remember pull-right psT"><input
-							type="checkbox" id="remember_me"
-							data-analytics="AuthPageRememberMe" data-attr1="master">
-							<small>Remember me</small></label>
 						<button type="button"
 							class="btn border border-secondary hover-button">Create
 							An Account</button>
