@@ -56,3 +56,4 @@ create table matching_answers(
 	match_key varchar(30),
     match_value varchar(30)
 );
+

@@ -37,7 +37,7 @@ public class QuizDatabase {
 		
 		
 		try {
-			statement.executeUpdate("insert into quizzes(quiz_name,description,author) "
+			statement.executeUpdate("insert into quizzes(quiz_name,description,author_id) "
 					+ "values('" + name + "','" + description + "',1)");
 		
 			
@@ -63,6 +63,7 @@ public class QuizDatabase {
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.OPEN_ENDED_NUM + ")";
 		
 		try {
+			System.out.println(sql);
 			statement.executeUpdate(sql);
 			for(int i=0;i<answers.size();i++) {
 				String questionId = "(select id from questions where ind = "
