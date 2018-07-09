@@ -12,8 +12,8 @@ create table quizzes(
 
 	quiz_id int unsigned auto_increment primary key,
 	quiz_name varchar(50) not null,
-	author varchar(50) not null,
-    description text
+	author_id int unsigned not null,
+  description text
 );
 
 

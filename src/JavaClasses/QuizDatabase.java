@@ -37,8 +37,8 @@ public class QuizDatabase {
 		
 		
 		try {
-			statement.executeUpdate("insert into quizzes(quizname,description,author) "
-					+ "values('" + name + "','" + description + "','dato')");
+			statement.executeUpdate("insert into quizzes(quiz_name,description,author) "
+					+ "values('" + name + "','" + description + "',1)");
 		
 			
 		} catch (SQLException e) {
@@ -58,7 +58,7 @@ public class QuizDatabase {
 	 */
 	public void addQuestion(String quizName, String description, int index, ArrayList<String> answers) {
 		
-		String quizId = "(select quiz_id from quizzes where quizname = \"" + quizName + "\")";
+		String quizId = "(select quiz_id from quizzes where quiz_name = \"" + quizName + "\")";
 		String sql = "insert into questions(quiz_id,description,ind,question_type) values("
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.OPEN_ENDED_NUM + ")";
 		
@@ -91,7 +91,7 @@ public class QuizDatabase {
 	 */
 	public void addQuestion(String quizName, String description, int index,ArrayList<String> choices,int correctIndex) {
 		
-		String quizId = "(select quiz_id from quizzes where quizname = \"" + quizName + "\")";
+		String quizId = "(select quiz_id from quizzes where quiz_name = \"" + quizName + "\")";
 		String sql = "insert into questions(quiz_id,description,ind,question_type) values("
 				+ quizId + "," + "'" + description + "'," + index + "," + Quiz.MULTI_CHOICE_NUM + ")";
 		try {
@@ -125,7 +125,7 @@ public class QuizDatabase {
 	 */
 	public void addQuestion(String quizName, String description, int index) {
 		
-		String quizId = "(select quiz_id from quizzes where quizname = \"" + quizName + "\")";
+		String quizId = "(select quiz_id from quizzes where quiz_name = \"" + quizName + "\")";
 		String sql = "insert into questions(quiz_id,description,ind,question_type) values("
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.FILL_IN_NUM + ")";
 		
@@ -147,7 +147,7 @@ public class QuizDatabase {
 	 */
 	public void addQuestion(String quizName, String description, int index, ArrayList<String> keys, ArrayList<String> values) {
 		
-		String quizId = "(select quiz_id from quizzes where quizname = \"" + quizName + "\")";
+		String quizId = "(select quiz_id from quizzes where quiz_name = \"" + quizName + "\")";
 		String sql = "insert into questions(quiz_id,description,ind,question_type) values("
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.MATCHING_NUM + ")";
 		
@@ -184,7 +184,7 @@ public class QuizDatabase {
 		
 		
 		String desc = "";
-		String query = "select * from quizzes where quizname = \"" + quizName + "\"";
+		String query = "select * from quizzes where quiz_name = \"" + quizName + "\"";
 		int id = 0;
 		try {
 			ResultSet set = statement.executeQuery(query);
@@ -281,7 +281,7 @@ public class QuizDatabase {
 	public ArrayList<String> getQuizNames(){
 		
 		ArrayList<String> result = new ArrayList<>();
-		String sql = "select quizname from quizzes";
+		String sql = "select quiz_name from quizzes";
 		ResultSet set;
 		try {
 			set = statement.executeQuery(sql);
@@ -301,7 +301,7 @@ public class QuizDatabase {
 	
 	public int getQuizIdByName(String name) {
 		
-		String sql = "select quiz_id from quizzes where quizname = '" + name + "'";
+		String sql = "select quiz_id from quizzes where quiz_name = '" + name + "'";
 		try {
 			ResultSet set = statement.executeQuery(sql);
 			set.next();
@@ -318,7 +318,7 @@ public class QuizDatabase {
 	
 	private String getQuizNamebyId(int id) {
 		
-		String sql = "select quizname from quizzes where quiz_id = " + id;
+		String sql = "select quiz_name from quizzes where quiz_id = " + id;
 		try {
 			ResultSet set = statement.executeQuery(sql);
 			set.next();
