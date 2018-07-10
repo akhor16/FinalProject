@@ -8,6 +8,8 @@ drop table if exists multiple_choice_answers;
 drop table if exists open_ended_answers;
 drop table if exists questions;
 drop table if exists quizzes;
+drop table if exists participations;
+drop table if exists users;
 
 create table quizzes(
 
@@ -46,9 +48,6 @@ create table multiple_choice_answers(
     correct int
 );
 
-
-
-
 create table matching_answers(
 
 	id int unsigned auto_increment primary key,
@@ -58,3 +57,17 @@ create table matching_answers(
     match_value varchar(30)
 );
 
+create table users (
+	id int unsigned auto_increment primary key,
+    user_name varchar(20) not null,
+    hash_password varchar(100) not null
+);
+
+create table participations(
+	id int unsigned auto_increment primary key,
+    quiz_id int unsigned not null,
+    foreign key(quiz_id) references quizzes(quiz_id),
+    user_id int unsigned not null,
+    foreign key(user_id) references users(id),
+    score int unsigned not null
+);
