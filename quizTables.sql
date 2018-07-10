@@ -16,7 +16,7 @@ create table quizzes(
 	quiz_id int unsigned auto_increment primary key,
 	quiz_name varchar(50) not null,
 	author_id int unsigned not null,
-  description text
+	description text
 );
 
 
@@ -59,8 +59,11 @@ create table matching_answers(
 
 create table users (
 	id int unsigned auto_increment primary key,
+	first_name varchar(20) not null,
+	last_name varchar(50) not null,
     user_name varchar(20) not null,
     hash_password varchar(100) not null
+    
 );
 
 create table participations(
@@ -69,5 +72,9 @@ create table participations(
     foreign key(quiz_id) references quizzes(quiz_id),
     user_id int unsigned not null,
     foreign key(user_id) references users(id),
-    score int unsigned not null
+    score int unsigned not null,
+    participation_date datetime default now()
 );
+
+use quizWebsite;
+select * from users;

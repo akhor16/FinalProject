@@ -1,7 +1,5 @@
 package JavaClasses;
 
-import java.util.ArrayList;
-
 /**
  * Object of this class is given to session
  * 
@@ -10,42 +8,17 @@ import java.util.ArrayList;
  */
 
 public class Account {
-	private String userName;
-	private ArrayList<String> createdQuizzes;
-	private ArrayList<String> takenQuizzes;
+	public static final String SESSION_ATTRIBUTE_NAME = "userId";
+	private int userId;
 	
-	public Account(String userName, ArrayList<String> createdQuizzes, ArrayList<String> takenQuizzes) {
-		this.userName = userName;
-		if(createdQuizzes == null) {
-			this.createdQuizzes = new ArrayList<String> ();
-		} else {
-			this.createdQuizzes = createdQuizzes;
-		}
-		
-		if(takenQuizzes == null) {
-			this.takenQuizzes = new ArrayList<String> ();
-		} else {
-			this.takenQuizzes = takenQuizzes;
-		}
+	public Account(int userId) {
+		this.userId = userId;
 	}
 	
-	public String getUserName() {
-		return userName;
-	}
-	
-	public ArrayList<String> getCreatedQuizzes() {
-		return new ArrayList<>(createdQuizzes);
-	}
-	
-	public ArrayList<String> getTakenQuizzes() {
-		return new ArrayList<>(takenQuizzes);
-	}
-	
-	public void addCreatedQuiz(String name) {
-		createdQuizzes.add(name);
-	}
-	
-	public void addTakenQuiz(String name) {
-		takenQuizzes.add(name);
+	/**
+	 * @return user id of the account
+	 */
+	public int getUserId() {
+		return userId;
 	}
 }

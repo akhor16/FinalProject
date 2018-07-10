@@ -42,7 +42,6 @@ public class QuizDatabase {
 		
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -76,7 +75,6 @@ public class QuizDatabase {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -111,7 +109,6 @@ public class QuizDatabase {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -133,7 +130,6 @@ public class QuizDatabase {
 		try {
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -164,7 +160,6 @@ public class QuizDatabase {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -225,7 +220,6 @@ public class QuizDatabase {
 			}
 			return quiz;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -289,7 +283,6 @@ public class QuizDatabase {
 			}
 			set.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -308,7 +301,6 @@ public class QuizDatabase {
 			set.close();
 			return result;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -324,11 +316,193 @@ public class QuizDatabase {
 			String result = set.getString(1);
 			return result;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return "";
 	}
 	
+	/**
+	 * Adds given user to database
+	 * @param name - name of user
+	 * @param lastName - last name of user
+	 * @param userName - user name
+	 * @param password - password
+	 */
+	public void addUser(String name, String lastName, String userName, String password) {
+		String hashPass = PasswordHash.getHashCode(password);
+		try {
+			statement.executeUpdate("insert into users(first_name, last_name, user_name, hash_password) " + "values('" + name
+					+ "','" + lastName + "','" + userName + "','" + hashPass + "')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param userName
+	 * @return ID of the user with given user name
+	 */
+	public int getUserIdByName(String userName) {
+		String sql = "(select id from users where user_name = \"" + userName + "\")";
+		int result = 0;
+		try {
+			ResultSet set = statement.executeQuery(sql);
+			set.next();
+			result = set.getInt(1);
+			set.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * Adds given participation activity to database
+	 * @param quizName - quiz name
+	 * @param userName - user name
+	 * @param score - taken score
+	 */
+	public void addParticipation(String quizName, String userName, int score) {
+		int quizId = getQuizIdByName(quizName);
+		int userId = getUserIdByName(userName);
+		addParticipation(quizId, userId, score);
+	}
+	
+	/**
+	 * Adds given participation activity to database
+	 * @param quizId - quiz ID
+	 * @param userId - user ID
+	 * @param score - taken score
+	 */
+	public void addParticipation(int quizId, int userId, int score) {
+		try {
+			statement.executeUpdate("insert into participations(quiz_id, user_id, score) " + "values("
+					+ quizId + "," + userId + "," + score + ")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param userName
+	 * @return new Account class object with userId of given userName
+	 */
+	public Account getAccount(String userName) {
+		int userId = getUserIdByName(userName);
+		return new Account(userId);
+	}
+
+	/**
+	 * 
+	 * @param userId
+	 * @return ArrayList of Quiz IDs which the given user created
+	 */
+	public ArrayList<String> getCreatedQuizzesIDs(int userId) {
+		ArrayList<String> createdQuizzes = new ArrayList<String>();
+		// Created quizzes
+		String createdQuizzesQuery = "select quiz_id from quizzes where author_id = " + userId;
+		try {
+			ResultSet rs = statement.executeQuery(createdQuizzesQuery);
+			while (rs.next()) {
+				createdQuizzes.add(rs.getString(1));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return createdQuizzes;
+	}
+
+	/**
+	 * 
+	 * @param userId
+	 * @return ArrayList of quiz IDs which the given user has taken
+	 */
+	public ArrayList<String> getTakenQuizzesIDs(int userId) {
+		ArrayList<String> takenQuizzes = new ArrayList<String>();
+		// Taken quizzes
+		String takenQuizzesQuery = "(select quiz_id from quizzes inner join participations on (participations.user_id = "
+				+ userId + "AND participations.user_id = quizzes.author_id)";
+		try {
+			ResultSet rs = statement.executeQuery(takenQuizzesQuery);
+			while (rs.next()) {
+				takenQuizzes.add(rs.getString(1));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return takenQuizzes;
+	}
+	
+	/**
+	 * 
+	 * @param userName - name of the user
+	 * @return true if the user with given user name is already registered, else false
+	 */
+	public boolean containsUser(String userName) {
+		String sql = "select id from users where user_name = '" + userName + "'";
+		try {
+			ResultSet rs = statement.executeQuery(sql);
+			if(rs.next()) {
+				rs.close();
+				return true;
+			} else {
+				rs.close();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * Takes user name and password, returns true if the login is correct
+	 * @param userName - user name
+	 * @param password - password
+	 * @return true if the login is correct, else false
+	 */
+	public boolean correctLogin(String userName, String password) {
+		if(!containsUser(userName)) {
+			return false;
+		}
+		String hashPass = PasswordHash.getHashCode(password);
+		int userId = getUserIdByName(userName);
+		String sql = "select hash_password from users where id = " + userId;
+		try {
+			ResultSet rs = statement.executeQuery(sql);
+			rs.next();
+			String hashPassInBase = rs.getString(1);
+			if(hashPass.equals(hashPassInBase)) {
+				return true;
+			} else return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param userId - user ID
+	 * @return User name
+	 */
+	public String getUserNameById(int userId) {
+		String sql = "select user_name from users where id = " + userId;
+		try {
+			ResultSet set = statement.executeQuery(sql);
+			set.next();
+			String result = set.getString(1);
+			set.close();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("NO USER WITH GIVEN ID");
+			return null;
+		}
+	}
 }

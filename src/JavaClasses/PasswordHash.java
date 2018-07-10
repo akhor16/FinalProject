@@ -8,9 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 public abstract class PasswordHash {
 	
-	private static final String HASH_ALGO = "SHA";
-	// Array of chars used to produce strings
-	public static final char[] CHARS = "abcdefghijklmnopqrstuvwxyz0123456789.,-!".toCharArray();	
+	private static final String HASH_ALGO = "SHA";	
 	
 	
 	/*

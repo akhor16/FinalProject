@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.Account, JavaClasses.QuizDatabase"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,6 +21,12 @@
 		
 	</head>
 	<body class = "bg">
+	<%
+		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
+		int userId = acc.getUserId();
+		QuizDatabase db = new QuizDatabase();
+		String userName = db.getUserNameById(userId);
+	%>
 		<nav class="navbar navbar-expand-lg navbar-light light-bg">
 	    <div><a class="navbar-brand border border-secondary rounded non-transparent" href="#"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>
       <div class = ' ml-3'>
@@ -69,7 +76,7 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/create-quiz.jsp" id = 'home'><h4 class="ml-3 mr-3 mb-auto mt-auto">Create Quiz</h4> </a>
         </li>
 	      <li class="nav-item  hover-shadow">
-	        <a class="nav-link" href="<%=request.getContextPath()%>/homepage.jsp" id ='login'><h4 class="ml-3 mr-3 mb-auto mt-auto h">Profile</h4></a>
+	        <a class="nav-link" href="<%=request.getContextPath()%>/homepage.jsp" id ='login'><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
 	      </li>
 	      <li class="nav-item  hover-shadow">
 	        <a class="nav-link" href="<%=request.getContextPath()%>/homepage.jsp" id = 'register'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
