@@ -182,8 +182,6 @@ public class QuizDatabase {
 	 * 
 	 */
 	public Quiz getQuiz(String quizName) {
-		
-		
 		String desc = "";
 		String query = "select * from quizzes where quiz_name = \"" + quizName + "\"";
 		int id = 0;

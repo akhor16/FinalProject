@@ -1,3 +1,4 @@
+drop database if exists quizWebsite;
 create database quizWebsite;
 use quizWebsite;
 

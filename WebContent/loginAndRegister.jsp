@@ -106,20 +106,23 @@
 							<div>
 								<div class="form-group col-sm-6">
 									<input type="password" data-minlength="6" class="form-control"
-										id="registerPassword" placeholder="Password" required>
+										id="passwordRegister" placeholder="Password" required>
 									<div class="help-block">Minimum of 6 characters</div>
 								</div>
 								<div class="form-group col-sm-6">
 									<input type="password" class="form-control"
-										id="registerPasswordConfirm" data-match="#inputPassword"
+										id="passwordRegisterConfirm" data-match="#inputPassword"
 										data-match-error="Didn't Match" placeholder="Confirm" required>
 									<div class="help-block with-errors"></div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<div>
+						<small class='red-small' id='wrongRegister'>sorry but the user name you entered is already in use</small>
+					</div>
 					<div class="clearfix msB">
-						<button type="button"
+						<button type="button" id="registerButton"
 							class="btn border border-secondary hover-button">Create
 							An Account</button>
 					</div>

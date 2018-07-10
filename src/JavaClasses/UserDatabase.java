@@ -41,7 +41,7 @@ public class UserDatabase {
 	}
 
 	public void addParticipation(String quizName, String userName, int score) {
-		String quizId = "(select quiz_id from quizzes where quizname = \"" + quizName + "\")";
+		String quizId = "(select quiz_id from quizzes where quiz_name = \"" + quizName + "\")";
 		String userId = "(select id from users where user_name = \"" + userName + "\")";
 		try {
 			statement.executeUpdate("insert into users(quiz_id, user_id, score) " + "values('" + quizId + "','" + userId
@@ -52,7 +52,6 @@ public class UserDatabase {
 	}
 
 	public Account getAccount(String userName) {
-		// Account acc = new Account(username, createdquizzes, takenquizes);
 		String userIdSelect = "select id from users where user_name = \"" + userName + "\"";
 		ResultSet rs;
 		int userId;
@@ -68,24 +67,22 @@ public class UserDatabase {
 		ArrayList<String> createdQuizzes = new ArrayList<String>();
 		ArrayList<String> takenQuizzes = new ArrayList<String>();
 
-		/*
-		 * String createdQuizzesQuery = "select quizname from quizzes where "
-		 */
-
-		// TODO Auto-generated catch block
-		/*
-		 * if any of the select querys is empty, just return account with empty
-		 * arraylist :)
-		 */
+		// Created quizzes
+		String createdQuizzesQuery = "select quiz_id from quizzes where author_id = " + userId;
 		
-		//String createdQuizzesQuery = "(select"
+		try {
+			rs = statement.executeQuery(createdQuizzesQuery);
+			while(rs.next()) {
+				createdQuizzes.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		
-
-		// String takenQuizzesIdQuery = "(select quiz_id from participations where
-		// user_id = " + userId + ")";
-
-		String takenQuizzesQuery = "(select quizname from quizzes inner join participations on (participations.user_id = "
-				+ userId + "AND participations.user_id = quizzes.user_id)";
+		// Taken quizzes
+		String takenQuizzesQuery = "(select quiz_id from quizzes inner join participations on (participations.user_id = "
+				+ userId + "AND participations.user_id = quizzes.author_id)";
 		try {
 			rs = statement.executeQuery(takenQuizzesQuery);
 			while (rs.next()) {
