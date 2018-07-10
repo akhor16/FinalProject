@@ -43,7 +43,7 @@ public class LoginRegisterServlet extends HttpServlet {
 		String userName = request.getParameter("userNameRegister");
 		String password = request.getParameter("passwordRegister");
 		String passwordConfirm = request.getParameter("passwordRegisterConfirm");
-		if(password.equals(passwordConfirm)/* && !db.containsUser(userName)*/) {
+		if(password.equals(passwordConfirm) && !db.containsUser(userName)) {
 			db.addUser(name, lastName, userName, password);
 			request.getSession().setAttribute(Account.SESSION_ATTRIBUTE_NAME, new Account(db.getUserIdByName(userName)));
 			response.getWriter().write("true");
