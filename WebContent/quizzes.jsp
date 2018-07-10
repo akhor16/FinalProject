@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.Quiz"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JavaClasses.QuizDatabase"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -52,6 +53,7 @@
 			ArrayList<String> names = base.getQuizNames();
 			%>
 				<% for(int i = 0; i < names.size(); i++) { %>
+				  <%Quiz quiz = base.getQuiz(names.get(i)); %>
 				<div class="m-3 light-bg border rounded"> 
 					<div class='m-1'>
 					<p class = 'rtl'>
@@ -61,13 +63,13 @@
 						<p>
 						 <div class="row a">
 							  <div class="column lef a">
-							 	 Question Num: <%=4 %>
+							 	 Question Num: <%=quiz.getQuestionNumber() %>
 							  </div>
 							  <div class="column cen a">
 							  	Duration: <%=60 %> min
 							  </div>
 							  <div class="column rig a">
-							  	<a class = 'notify-label mb-0 text-dark' href = "#">Take a Quiz >> </a>
+							  	<a class = 'notify-label mb-0 text-dark' href = "<%=request.getContextPath()%>/QuizDescription?id=<%=id%>">Take a Quiz >> </a>
 								</div>
 							  
 						</div> 
