@@ -23,6 +23,10 @@
 	<body class = "bg">
 	<%
 		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
+		if(acc == null){
+			RequestDispatcher rd = request.getRequestDispatcher("loginAndRegister.jsp");
+			rd.forward(request, response);
+		}
 		int userId = acc.getUserId();
 		QuizDatabase db = new QuizDatabase();
 		String userName = db.getUserNameById(userId);
