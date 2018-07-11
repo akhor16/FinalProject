@@ -80,7 +80,7 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/create-quiz.jsp" id = 'home'><h4 class="ml-3 mr-3 mb-auto mt-auto">Create Quiz</h4> </a>
         </li>
 	      <li class="nav-item  hover-shadow">
-	        <a class="nav-link" href="<%=request.getContextPath()%>/homepage.jsp" id ='login'><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+	        <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
 	      </li>
 	      <li class="nav-item  hover-shadow">
 	        <a class="nav-link" href="<%=request.getContextPath()%>/homepage.jsp" id = 'register'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>

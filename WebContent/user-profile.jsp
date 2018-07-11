@@ -1,3 +1,4 @@
+<%@page import="JavaClasses.Account, JavaClasses.QuizDatabase"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +19,16 @@
 
 <title>Profile</title>
 </head>
+<%
+		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
+		if(acc == null){
+			RequestDispatcher rd = request.getRequestDispatcher("loginAndRegister.jsp");
+			rd.forward(request, response);
+		}
+		int userId = acc.getUserId();
+		QuizDatabase db = new QuizDatabase();
+		String userName = db.getUserNameById(userId);
+	%>
 <body class = 'bg'>
 
   <nav class="navbar navbar-expand-lg navbar-light light-bg">
@@ -31,7 +42,7 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/quizzes.jsp" id = 'about'><h4 class="ml-3 mr-3 mb-auto mt-auto">Quizzes</h4> </a>
         </li>
         <li class="nav-item  hover-shadow">
-          <a class="nav-link" href="#" id ='login'><h4 class="ml-3 mr-3 mb-auto mt-auto">Profile</h4></a>
+          <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
         </li>
         <li class="nav-item  hover-shadow">
           <a class="nav-link" href="#" id = 'register'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
