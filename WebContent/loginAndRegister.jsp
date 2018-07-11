@@ -30,12 +30,6 @@
 			class="navbar-brand border border-secondary rounded non-transparent"
 			href="#"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a>
 	</div>
-	<ul class="navbar-nav ml-auto">
-		<li class="nav-item hover-shadow"><a class="nav-link" href="#"
-			id='home'><h4 class="ml-3 mr-3 mb-auto mt-auto">Home</h4> </a></li>
-		<li class="nav-item  hover-shadow"><a class="nav-link" href="#"
-			id='about'><h4 class="ml-3 mr-3 mb-auto mt-auto">Quizzes</h4> </a></li>
-	</ul>
 	</nav>
 
 	<div class="container">
