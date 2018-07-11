@@ -28,7 +28,7 @@
 			rd.forward(request, response);
 		}
 		int userId = acc.getUserId();
-		QuizDatabase db = new QuizDatabase();
+		QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 		String userName = db.getUserNameById(userId);
 	%>
 		<nav class="navbar navbar-expand-lg navbar-light light-bg">

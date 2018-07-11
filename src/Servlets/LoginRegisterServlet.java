@@ -37,7 +37,7 @@ public class LoginRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QuizDatabase db = new QuizDatabase();
+		QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 		String name = request.getParameter("nameRegister");
 		String lastName = request.getParameter("lastNameRegister");
 		String userName = request.getParameter("userNameRegister");

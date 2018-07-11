@@ -49,7 +49,7 @@
 	<div class="container-fluid mt-3">
 		<div class='row justify-content-center '>
 			<div class="col-sm-8 border">
-			<%QuizDatabase base = new QuizDatabase();
+			<%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 			ArrayList<String> names = base.getQuizNames();
 			%>
 				<% for(int i = 0; i < names.size(); i++) { %>

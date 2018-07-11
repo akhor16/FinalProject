@@ -44,7 +44,7 @@
     </nav>
      
     <%String quizId = request.getParameter("id"); %> 
-    <%QuizDatabase base = new QuizDatabase(); %>
+    <%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME); %>
     <%int id = Integer.parseInt(quizId); %>
     <%Quiz quiz = base.getQuiz(id);%>  
     <div class = 'container-fluid mt-3'>

@@ -7,43 +7,59 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 import JavaClasses.MyDBInfo;
 
 public class QuizDatabase {
 	
-	private Connection connection;
-	private Statement statement;
+	public static final String ATTRIBUTE_NAME = "base";
+	
+	private MysqlDataSource dataSource;
 	
 	public QuizDatabase() {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			connection = DriverManager.getConnection(MyDBInfo.MYSQL_DATABASE_SERVER + 
-					MyDBInfo.MYSQL_DATABASE_NAME + "?useSSL=false",
-					MyDBInfo.MYSQL_USERNAME, MyDBInfo.MYSQL_PASSWORD);
-			
-			statement = connection.createStatement();
+			dataSource = new MysqlDataSource();
+			connectToBase();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
+		
+	}
+	
+	private void connectToBase() {
+		
+		dataSource.setUser(MyDBInfo.MYSQL_USERNAME);
+		dataSource.setPassword(MyDBInfo.MYSQL_PASSWORD);
+		dataSource.setUrl(MyDBInfo.MYSQL_DATABASE_SERVER + MyDBInfo.MYSQL_DATABASE_NAME + "?useSSL=false");
+		
+	}
+	
+	private Connection getConnection() throws SQLException {
+		
+		return dataSource.getConnection();
 		
 	}
 	
 	public void addToBase(String name, String description) {
 		
-		
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate("insert into quizzes(quiz_name,description,author_id) "
 					+ "values('" + name + "','" + description + "',1)");
-		
+			
+			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		
 	}
 	
@@ -62,7 +78,10 @@ public class QuizDatabase {
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.OPEN_ENDED_NUM + ")";
 		
 		try {
-			System.out.println(sql);
+			
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate(sql);
 			for(int i=0;i<answers.size();i++) {
 				String questionId = "(select id from questions where ind = "
@@ -72,7 +91,9 @@ public class QuizDatabase {
 				
 				statement.executeUpdate(ansSql);
 				
+				
 			}
+			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -94,6 +115,10 @@ public class QuizDatabase {
 		String sql = "insert into questions(quiz_id,description,ind,question_type) values("
 				+ quizId + "," + "'" + description + "'," + index + "," + Quiz.MULTI_CHOICE_NUM + ")";
 		try {
+			
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate(sql);
 			
 			for(int i=0;i<choices.size();i++) {
@@ -105,8 +130,12 @@ public class QuizDatabase {
 						+index+" and quiz_id = "+quizId+")";
 				String ansSql = "insert into multiple_choice_answers(question_id,choice,correct) values("
 						+ questionId + ",'" + choices.get(i) +"'," + correct + ")";
+				
+				
 				statement.executeUpdate(ansSql);
 			}
+			
+			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -128,7 +157,12 @@ public class QuizDatabase {
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.FILL_IN_NUM + ")";
 		
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate(sql);
+			
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -149,6 +183,9 @@ public class QuizDatabase {
 				+ quizId + "," + "'" + description + "'," + index + ", " + Quiz.MATCHING_NUM + ")";
 		
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate(sql);
 			
 			for(int i=0;i<keys.size();i++) {
@@ -157,7 +194,10 @@ public class QuizDatabase {
 				String ansSql = "insert into matching_answers(question_id,match_key,match_value) values("
 						+ questionId + ",'" + keys.get(i) +"', '"+values.get(i)+"')";
 				statement.executeUpdate(ansSql);
+				
+				
 			}
+			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,6 +221,9 @@ public class QuizDatabase {
 		String query = "select * from quizzes where quiz_name = \"" + quizName + "\"";
 		int id = 0;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet set = statement.executeQuery(query);
 			set.next();
 			desc = set.getString(4);
@@ -218,6 +261,9 @@ public class QuizDatabase {
 					quiz.addFillInQuestion(questionText);
 				}
 			}
+			
+			connection.close();
+			
 			return quiz;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -277,11 +323,15 @@ public class QuizDatabase {
 		String sql = "select quiz_name from quizzes";
 		ResultSet set;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			set = statement.executeQuery(sql);
 			while(set.next()) {
 				result.add(set.getString(1));
 			}
-			set.close();
+			
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -295,10 +345,15 @@ public class QuizDatabase {
 		
 		String sql = "select quiz_id from quizzes where quiz_name = '" + name + "'";
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet set = statement.executeQuery(sql);
 			set.next();
 			int result = set.getInt(1);
-			set.close();
+			
+			connection.close();
+			
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -311,9 +366,15 @@ public class QuizDatabase {
 		
 		String sql = "select quiz_name from quizzes where quiz_id = " + id;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet set = statement.executeQuery(sql);
 			set.next();
 			String result = set.getString(1);
+			
+			connection.close();
+			
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -332,8 +393,13 @@ public class QuizDatabase {
 	public void addUser(String name, String lastName, String userName, String password) {
 		String hashPass = PasswordHash.getHashCode(password);
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate("insert into users(first_name, last_name, user_name, hash_password) " + "values('" + name
 					+ "','" + lastName + "','" + userName + "','" + hashPass + "')");
+			
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -348,10 +414,14 @@ public class QuizDatabase {
 		String sql = "(select id from users where user_name = \"" + userName + "\")";
 		int result = 0;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet set = statement.executeQuery(sql);
 			set.next();
 			result = set.getInt(1);
-			set.close();
+			
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -378,8 +448,13 @@ public class QuizDatabase {
 	 */
 	public void addParticipation(int quizId, int userId, int score) {
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			statement.executeUpdate("insert into participations(quiz_id, user_id, score) " + "values("
 					+ quizId + "," + userId + "," + score + ")");
+			
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -405,11 +480,14 @@ public class QuizDatabase {
 		// Created quizzes
 		String createdQuizzesQuery = "select quiz_id from quizzes where author_id = " + userId;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet rs = statement.executeQuery(createdQuizzesQuery);
 			while (rs.next()) {
 				createdQuizzes.add(rs.getString(1));
 			}
-			rs.close();
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -427,11 +505,14 @@ public class QuizDatabase {
 		String takenQuizzesQuery = "(select quiz_id from quizzes inner join participations on (participations.user_id = "
 				+ userId + "AND participations.user_id = quizzes.author_id)";
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet rs = statement.executeQuery(takenQuizzesQuery);
 			while (rs.next()) {
 				takenQuizzes.add(rs.getString(1));
 			}
-			rs.close();
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -446,12 +527,16 @@ public class QuizDatabase {
 	public boolean containsUser(String userName) {
 		String sql = "select id from users where user_name = '" + userName + "'";
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet rs = statement.executeQuery(sql);
+			
 			if(rs.next()) {
-				rs.close();
+				connection.close();
 				return true;
 			} else {
-				rs.close();
+				connection.close();
 				return false;
 			}
 		} catch (SQLException e) {
@@ -474,9 +559,15 @@ public class QuizDatabase {
 		int userId = getUserIdByName(userName);
 		String sql = "select hash_password from users where id = " + userId;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet rs = statement.executeQuery(sql);
+			
+			
 			rs.next();
 			String hashPassInBase = rs.getString(1);
+			connection.close();
 			if(hashPass.equals(hashPassInBase)) {
 				return true;
 			} else return false;
@@ -494,10 +585,16 @@ public class QuizDatabase {
 	public String getUserNameById(int userId) {
 		String sql = "select user_name from users where id = " + userId;
 		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
 			ResultSet set = statement.executeQuery(sql);
+			
+			
 			set.next();
 			String result = set.getString(1);
 			set.close();
+			connection.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();

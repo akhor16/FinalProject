@@ -48,12 +48,7 @@ public class CreateQuiz extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
-		QuizDatabase base = new QuizDatabase();
-		
-		
-		
+		QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 		
 		String quizName = request.getParameter(CreateQuizConstants.QUIZ_NAME);
 		String quizDesc = request.getParameter(CreateQuizConstants.QUIZ_DESCRIPTION);

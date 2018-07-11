@@ -46,7 +46,7 @@
         </li>
       </ul>
     </nav>
-    <%QuizDatabase base = new QuizDatabase(); 
+    <%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
     int id = Integer.parseInt(request.getParameter("id"));
     Quiz quiz = base.getQuiz(id);
     %>
