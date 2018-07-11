@@ -28,6 +28,8 @@ public class Quiz {
 	 */
 	public static final int FILL_IN_NUM = 3;
 
+	public String authorUserName;
+
 	/**
 	 * Creates new Quiz Object
 	 * 
@@ -43,6 +45,10 @@ public class Quiz {
 		multiChoiceList = new ArrayList<MultiChoiceQuestion>();
 		matchingList = new ArrayList<MatchingQuestion>();
 		fillInList = new ArrayList<FillInQuestion>();
+	}
+
+	public void setAuthor(String authorUserName) {
+		this.authorUserName = authorUserName;
 	}
 
 	/**
@@ -164,6 +170,20 @@ public class Quiz {
 		return curQuestion.checkAnswer(answers);
 	}
 
+	/**
+	 * 
+	 * @param index
+	 *            - Index of the question
+	 * @return Question text with correct answers
+	 */
+	public String getFullFillInQuestionText(int index) {
+		FillInQuestion curQuestion = getFillInQuestion(index);
+		if (curQuestion == null) {
+			return null;
+		}
+		return curQuestion.getFullQuestionText();
+	}
+
 	// Matching Question
 
 	/**
@@ -267,6 +287,19 @@ public class Quiz {
 			return null;
 		}
 		return curQuestion.getQuestionText();
+	}
+
+	/**
+	 * 
+	 * @param index - Index of the question
+	 * @return ArrayList of correct answers for given question
+	 */
+	public ArrayList<String> getOpenEndedAnswers(int index) {
+		OpenEndedQuestion curQuestion = getOpenEndedQuestion(index);
+		if (curQuestion == null) {
+			return null;
+		}
+		return curQuestion.getCorrectAnswers();
 	}
 
 	/**
@@ -411,6 +444,10 @@ public class Quiz {
 			this.correctAnswers = new ArrayList<>(correctAnswers);
 		}
 
+		public ArrayList<String> getCorrectAnswers() {
+			return new ArrayList<>(correctAnswers);
+		}
+
 		public String getQuestionText() {
 			return questionText;
 		}
@@ -445,7 +482,7 @@ public class Quiz {
 		}
 
 		public ArrayList<String> getPossibleAnswers() {
-			return answers;
+			return new ArrayList<>(answers);
 		}
 	}
 
@@ -497,11 +534,11 @@ public class Quiz {
 		}
 
 		public ArrayList<String> getKeys() {
-			return keysArrayList;
+			return new ArrayList<>(keysArrayList);
 		}
 
 		public ArrayList<String> getValues() {
-			return valuesArrayList;
+			return new ArrayList<>(valuesArrayList);
 		}
 
 	}
@@ -512,6 +549,7 @@ public class Quiz {
 		private String questionText = "";
 		private ArrayList<String> correctAnswers = new ArrayList<String>();
 		private int wordFillNum;
+		private String fullQuestionText;
 
 		/*
 		 * Fill in question constructor. Answers are in given text. It parses String,
@@ -519,6 +557,7 @@ public class Quiz {
 		 * answers in ArrayList
 		 */
 		public FillInQuestion(String questionText) {
+			this.fullQuestionText = questionText;
 			int pos = 0;
 			while (true) {
 				if (pos >= questionText.length()) {
@@ -537,6 +576,10 @@ public class Quiz {
 			}
 
 			wordFillNum = correctAnswers.size();
+		}
+
+		public String getFullQuestionText() {
+			return fullQuestionText;
 		}
 
 		public String getQuestionText() {
