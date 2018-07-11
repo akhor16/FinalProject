@@ -43,7 +43,7 @@
       </ul>
     </nav>
      
-    <%String quizId = (String)request.getAttribute("id"); %> 
+    <%String quizId = request.getParameter("id"); %> 
     <%QuizDatabase base = new QuizDatabase(); %>
     <%int id = Integer.parseInt(quizId); %>
     <%Quiz quiz = base.getQuiz(id);%>  

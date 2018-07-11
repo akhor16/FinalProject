@@ -1,3 +1,5 @@
+<%@page import="JavaClasses.Quiz"%>
+<%@page import="JavaClasses.QuizDatabase"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,6 +17,9 @@
     <!-- This webpage's costum css files -->
     <style><%@include file="styles/style.css"%></style>
     <style><%@include file="styles/quiz-summary-style.css"%></style>
+    
+    <script type="text/javascript"><%@include file="scripts/quiz-summary-script.js"%></script>
+    
     <title>Summary</title>
 </head>
 <body class = 'bg'>
@@ -37,20 +42,25 @@
         </li>
       </ul>
     </nav>
+    <%QuizDatabase base = new QuizDatabase();
+    Quiz quiz = base.getQuiz(Integer.parseInt(request.getParameter("id")));
+    %>
     
     <div class = 'container-fluid mt-3'>
     
       <div class = 'row'>
         <div class = 'col-sm-8'>
           <div class ='light-bg rounded m-1 p-1'>
-            <h1 class = 'display-4 m-3'>Quiz Name</h1>
+            <h1 class = 'display-4 m-3'><%=quiz.getQuizName() %></h1>
             <h3 class ='m-2'>Author: <label class ='text-info author'>Rezo</label></h3>
-            <h4 class = 'm-2'>Number of Questions: 8</h4>
+            <h4 class = 'm-2'>Number of Questions: <%=quiz.getQuestionNumber() %></h4>
             <div class = 'm-2 lighter-bg rounded'>
-              <h5>Some quiz description</h5>
+              <h5><%=quiz.getQuizDescription() %></h5>
             </div>
-            <button class = 'btn btn-dark m-1 mr-3'><h3>Start Quiz</h3></button>
-            <button class = 'btn btn-info m-1 ml-3'><h3>Quiz Edition</h3></button>
+            <input type = 'hidden' id = 'start-path' value = '<%=request.getContextPath() + "/take-quiz.jsp?id=" + request.getParameter("id")%>'>
+            <input type = 'hidden' id = 'edit-path' value = '<%=request.getContextPath() + "/edit-quiz.jsp?id=" + request.getParameter("id")%>'>
+            <button class = 'btn btn-dark m-1 mr-3' id = 'start' ><h3>Start Quiz</h3></button>
+            <button class = 'btn btn-info m-1 ml-3' id = 'edit'><h3>Quiz Edition</h3></button>
           </div>
           
           <%for(int i=0;i<4;i++){ %>

@@ -118,15 +118,9 @@ public class CreateQuiz extends HttpServlet {
 			}
 			
 		}
-		
-		
-		
-		ServletContext context = request.getServletContext();
-		//addToBase(quiz,context);
-		//request.setAttribute("name",quiz.getQuizName());
-		
-		//RequestDispatcher dispatch = request.getRequestDispatcher("take-quiz.jsp");
-		//dispatch.forward(request, response);
+		int quizId = base.getQuizIdByName(quizName);
+		RequestDispatcher dispatch = request.getRequestDispatcher("quiz-summary.jsp?id=" + quizId);
+		dispatch.forward(request, response);
 		
 	}
 	
@@ -136,10 +130,5 @@ public class CreateQuiz extends HttpServlet {
 	 * @param quiz
 	 * @param context
 	 */
-	private void addToBase(Quiz quiz, ServletContext context) {
-		
-		context.setAttribute(quiz.getQuizName(), quiz);
-		
-	}
-
+	
 }

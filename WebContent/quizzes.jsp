@@ -58,7 +58,7 @@
 					<div class='m-1'>
 					<p class = 'rtl'>
 						<%int id = base.getQuizIdByName(names.get(i)); %>
-	    				<a class='h2 notify-label mb-1 text-dark' href="<%=request.getContextPath()%>/QuizDescription?id=<%=id%>"><%=names.get(i) %></a>
+	    				<a class='h2 notify-label mb-1 text-dark' href="<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=id%>"><%=names.get(i) %></a>
 						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%= "ყველაზე მაგარი ავტორი"%> </a></p>
 						<p>
 						 <div class="row a">
@@ -69,7 +69,7 @@
 							  	Duration: <%=60 %> min
 							  </div>
 							  <div class="column rig a">
-							  	<a class = 'notify-label mb-0 text-dark' href = "<%=request.getContextPath()%>/QuizDescription?id=<%=id%>">Take a Quiz >> </a>
+							  	<a class = 'notify-label mb-0 text-dark' href = "<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=id%>">Take a Quiz >> </a>
 								</div>
 							  
 						</div> 
