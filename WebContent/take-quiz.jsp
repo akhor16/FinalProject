@@ -25,7 +25,7 @@
 </head>
 <body class = 'bg'>
     <nav class="navbar navbar-expand-lg navbar-light light-bg">
-      <div><a class="navbar-brand border border-secondary rounded non-transparent" href="#"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>
+      <div><a class="navbar-brand border border-secondary rounded non-transparent" href="homepage.jsp"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item hover-shadow">

@@ -26,7 +26,6 @@ public class LoginRegisterServlet extends HttpServlet {
 		String userName = request.getParameter("userNameLogin");
 		String password = request.getParameter("passwordLogin");
 		QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-		System.out.println("adasd");
 		if(db.correctLogin(userName, password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute(Account.SESSION_ATTRIBUTE_NAME, new Account(db.getUserIdByName(userName)));
