@@ -23,13 +23,18 @@
 	<body class = "bg">
 	<%
 		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
+  
+    String userName = "";
 		if(acc == null){
-			RequestDispatcher rd = request.getRequestDispatcher("loginAndRegister.jsp");
-			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/loginAndRegister.jsp");
+		}else{
+			
+			int userId = acc.getUserId();
+	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+	    userName = db.getUserNameById(userId);
+			
 		}
-		int userId = acc.getUserId();
-		QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-		String userName = db.getUserNameById(userId);
+		
 	%>
 		<nav class="navbar navbar-expand-lg navbar-light light-bg">
 	    <div><a class="navbar-brand border border-secondary rounded non-transparent" href="#"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>

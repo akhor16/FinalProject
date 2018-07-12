@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import JavaClasses.Account;
 import JavaClasses.QuizDatabase;
@@ -24,9 +25,12 @@ public class LoginRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userNameLogin");
 		String password = request.getParameter("passwordLogin");
-		QuizDatabase db = new QuizDatabase();
+		QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+		System.out.println("adasd");
 		if(db.correctLogin(userName, password)) {
-			request.getSession().setAttribute(Account.SESSION_ATTRIBUTE_NAME, new Account(db.getUserIdByName(userName)));
+			HttpSession session = request.getSession();
+			session.setAttribute(Account.SESSION_ATTRIBUTE_NAME, new Account(db.getUserIdByName(userName)));
+			
 			response.getWriter().write("true");
 		}else {
 			response.getWriter().write("false");

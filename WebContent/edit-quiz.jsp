@@ -61,6 +61,7 @@
               <h2 class = 'm-2 display-4'> Editing Quiz: </h2>
               <div class ='row m-1'>
                 <input type="text" name = '<%=CreateQuizConstants.QUIZ_NAME%>' class="form-control light-bg login-input" value = '<%=quiz.getQuizName() %>' placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
+                <input type = 'hidden' name = 'quiz-id' value = '<%=id%>'>
                 <small class = 'red-small' id = 'min-limit'>sorry, but you should enter longer name</small>
                  
               </div>
@@ -93,13 +94,19 @@
                   <%if(quiz.getType(i) == Quiz.MATCHING_NUM) %><option value = '#match'>Matching</option>
                 </select>
                 <%String questionDesc = quiz.getQuestionText(i); %>
-                <%if(quiz.getType(i) == Quiz.FILL_IN_NUM) questionDesc = quiz.getFullFillInQuestionText(i);%>
+                <%if(quiz.getType(i) == Quiz.FILL_IN_NUM){
+                	questionDesc = quiz.getFullFillInQuestionText(i);%>
+                  <input type = 'hidden' value = '<%=Quiz.FILL_IN_NUM%>' name = 'question-type<%=i%>'>
+                <%} %>
                 <textarea name = '<%=CreateQuizConstants.QUESTION_DESCRIPTION + "" + i%>' class="form-control light-bg login-input m-1" 
                       placeholder="Question:" rows="6" cols="50" maxlength="1200" id ='textarea'><%=questionDesc %> </textarea>
                 
+                
+                <!-- MULTIPLE CHOICE DIV -->
                 <%if(quiz.getType(i) == Quiz.MULTI_CHOICE_NUM){ %>
+                  <input type = 'hidden' value = '<%=Quiz.MULTI_CHOICE_NUM%>' name = 'question-type<%=i%>'>
                   <%ArrayList<String> answers = quiz.getMultiChoiceQuestionPossibleAnswers(i); %>
-	                <!-- MULTIPLE CHOICE DIV -->
+	                <input type = 'hidden' name = 'ans-num<%=i %>' value = '<%=answers.size() %>' >
 	                <div id = 'multiple-choice' class = 'm-2'>
 	                <%for(int j=0;j<answers.size();j++){ %>       
                     <div class="radio m-3">
@@ -115,9 +122,11 @@
 	                </div>
                 <%} %>
                 
+                <!-- OPEN ENDED DIV -->
                 <%if(quiz.getType(i) == Quiz.OPEN_ENDED_NUM){ %>
+                  <input type = 'hidden' value = '<%=Quiz.OPEN_ENDED_NUM%>' name = 'question-type<%=i%>'>
                   <%ArrayList<String> answers = quiz.getOpenEndedAnswers(i); %>
-	                <!-- OPEN ENDED DIV -->
+                  <input type = 'hidden' name = 'ans-num<%=i %>' value = '<%=answers.size() %>' >
 	                <div id = 'open-ended' class = 'm-2'>
 	                  <% for(int j=0;j<answers.size();j++){%>
 	                  <div id = 'answer1' class = 'mt-1'>
@@ -135,12 +144,15 @@
 	                
                 <%} %>
                 
+                <!-- MATCHING DIV-->
                 <%if(quiz.getType(i) == Quiz.MATCHING_NUM){ %>
-	                <!-- MATCHING DIV-->
+                  <input type = 'hidden' value = '<%=Quiz.MATCHING_NUM%>' name = 'question-type<%=i%>'>
+	                
 	                <div id = 'match'>
 	                <%ArrayList<String> keys = quiz.getMatchingQuestionKeys(i);
 	                 ArrayList<String> values = quiz.getMatchingQuestionValues(i);
 	                %>
+	                <input type = 'hidden' name = 'ans-num<%=i %>' value = '<%=keys.size() %>' >
 	                  <%for(int j=0;j<keys.size();j++){ %> 
 	                  <div  class = 'row'>
 	                    <input name = '<%=CreateQuizConstants.LEFT_MATCHING + i + j%>' type = 'text' class = 'login-input match-field m-3' 

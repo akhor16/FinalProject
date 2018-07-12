@@ -1,7 +1,6 @@
 package JavaClasses;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -602,4 +601,147 @@ public class QuizDatabase {
 			return null;
 		}
 	}
+	
+	public void updateQuizAttributes(int quizId, String newName,String newDesc) {
+		
+		String sql = "update quizzes set quiz_name = '" + newName + "',description = '"+newDesc+"' where quiz_id = " + quizId;
+		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate(sql);
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public void updateFillQuestion(int quizId, int ind, String newDesc) {
+		
+		updateQuestion(quizId,ind,newDesc);
+		
+	}
+	
+	private String questionId(int quizId,int ind) {
+		
+		String questionId = "(select id from questions where quiz_id = " 
+				+ quizId + " and ind = " + ind + ")";
+		
+		return questionId;
+	}
+	
+	private String generateDeleteSql(int quizId, int ind,String table) {
+		
+		
+		String deleteSql = "delete from " + table + " where question_id = " + questionId(quizId,ind);
+		
+		return deleteSql;
+		
+	}
+	
+	public void updateOpenEndedQuestion(int quizId, int ind, String newDesc, ArrayList<String> answers) {
+		
+		updateQuestion(quizId,ind,newDesc);
+		
+		
+		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate(generateDeleteSql(quizId,ind,"open_ended_answers"));
+			
+			for(int i=0;i<answers.size();i++) {
+				String addSql = "insert into open_ended_answers(question_id,answer) values("
+							+ questionId(quizId,ind) + "," + "'" + answers.get(i) + "')";
+				statement.executeUpdate(addSql);
+			}
+			
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	public void updateMultipleChoiceQuestion(int quizId, int ind, String newDesc, ArrayList<String> answers, int correctIndex) {
+		
+		updateQuestion(quizId,ind,newDesc);
+		
+		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate(generateDeleteSql(quizId, ind,"multiple_choice_answers"));
+			int correct = 0;
+			for(int i=0;i<answers.size();i++) {
+				if(correctIndex == i) {
+					correct = 1;
+				}
+				String addSql = "insert into multiple_choice_answers(question_id,choice,correct) values("
+							+ questionId(quizId,ind) + "," + "'" + answers.get(i) + "', " + correct + ")";
+				statement.executeUpdate(addSql);
+			}
+			
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updateMatchingQuestion(int quizId, int ind, String newDesc, ArrayList<String> newKeys, ArrayList<String> newValues) {
+		
+		updateQuestion(quizId,ind,newDesc);
+		
+		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate(generateDeleteSql(quizId, ind,"matching_answers"));
+			
+			for(int i=0;i<newKeys.size();i++) {
+				
+				String ansSql = "insert into matching_answers(question_id,match_key,match_value) values("
+						+ questionId(quizId,ind) + ",'" + newKeys.get(i) +"', '"+newValues.get(i)+"')";
+				statement.executeUpdate(ansSql);
+			}
+			
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	private void updateQuestion(int quizId, int ind, String newDesc) {
+		
+		String sql = "update questions set description = '" + newDesc +"' where quiz_id = " 
+					+ quizId + " and ind = " + ind;
+		
+		Connection connection;
+		try {
+			connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			statement.executeUpdate(sql);
+			
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 }
