@@ -1,3 +1,4 @@
+<%@page import="sun.security.pkcs11.Secmod.DbMode"%>
 <%@page import="JavaClasses.Quiz"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JavaClasses.Account, JavaClasses.QuizDatabase"%>
@@ -39,7 +40,7 @@
 	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 	    userName = db.getUserNameById(userId);
 			
-		}
+		
 		
 	%>
 <body class="bg">
@@ -75,7 +76,7 @@
 					<p class = 'rtl'>
 						<%int id = base.getQuizIdByName(names.get(i)); %>
 	    				<a class='h2 notify-label mb-1 text-dark' href="<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=id%>"><%=names.get(i) %></a>
-						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%=quiz.authorUserName%> </a></p>
+						<p>Author: <a class = "notify-label mb-0 text-dark" href = "user-profile.jsp?id="<%=userId %>> <%= quiz.getAuthorUserName()%> </a></p>
 						<p>
 						 <div class="row a">
 							  <div class="column lef a">
@@ -100,3 +101,4 @@
 	</div>
 </body>
 </html>
+<%}%>

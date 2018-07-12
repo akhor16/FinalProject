@@ -18,24 +18,24 @@
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Quiz Homepage</title>
-		
-	</head>
-	<body class = "bg">
-	<%
+		<%
 		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
-  
-    String userName = "";
+  		int userId;
+    String userName;
 		if(acc == null){
 			response.sendRedirect(request.getContextPath() + "/loginAndRegister.jsp");
 		}else{
 			
-			int userId = acc.getUserId();
-	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-	    userName = db.getUserNameById(userId);
+			userId = acc.getUserId();
+	    	QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+	    	userName = db.getUserNameById(userId);
+	    	
 			
-		}
+		
 		
 	%>
+	</head>
+	<body class = "bg">
 		<nav class="navbar navbar-expand-lg navbar-light light-bg">
 	    <div><a class="navbar-brand border border-secondary rounded non-transparent" href="#"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>
       <div class = ' ml-3'>
@@ -85,7 +85,7 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/create-quiz.jsp" id = 'home'><h4 class="ml-3 mr-3 mb-auto mt-auto">Create Quiz</h4> </a>
         </li>
 	      <li class="nav-item  hover-shadow">
-	        <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+	        <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp?id=<%=userId %>"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
 	      </li>
 	      <li class="nav-item  hover-shadow">
 	        <a class="nav-link" href="LogoutServlet?method=get" id = 'logout'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
@@ -300,3 +300,4 @@
     	
 	</body>
 </html>
+<%}%>

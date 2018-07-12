@@ -28,7 +28,7 @@ public class Quiz {
 	 */
 	public static final int FILL_IN_NUM = 3;
 
-	public String authorUserName;
+	private String authorUserName;
 
 	/**
 	 * Creates new Quiz Object
@@ -47,10 +47,22 @@ public class Quiz {
 		fillInList = new ArrayList<FillInQuestion>();
 	}
 
+	/**
+	 * 
+	 * @param authorUserName sets author's user name
+	 */
 	public void setAuthor(String authorUserName) {
 		this.authorUserName = authorUserName;
 	}
 
+	/**
+	 * 
+	 * @return user name of the author
+	 */
+	public String getAuthorUserName() {
+		return authorUserName;
+	}
+	
 	/**
 	 * 
 	 * @return Total number of questions in Quiz

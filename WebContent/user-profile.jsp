@@ -27,7 +27,7 @@
 		}
 		int userId = acc.getUserId();
 		QuizDatabase db = new QuizDatabase();
-		String userName = db.getUserNameById(userId);
+		String loginUserName = db.getUserNameById(userId);
 	%>
 <body class = 'bg'>
 
@@ -42,21 +42,23 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/quizzes.jsp" id = 'about'><h4 class="ml-3 mr-3 mb-auto mt-auto">Quizzes</h4> </a>
         </li>
         <li class="nav-item  hover-shadow">
-          <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+          <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=loginUserName %></h4></a>
         </li>
         <li class="nav-item  hover-shadow">
           <a class="nav-link" href="LogoutServlet?method=get" id = 'logout'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
         </li>
       </ul>
     </nav>
-    
+    <%
+    	String id = request.getParameter("id");
+    	String userName = db.getUserNameById(Integer.parseInt(id));
+    %>    
     <div class = 'container-fluid mt-3'>
       
       <div class = 'row'>
         <div class = 'col-sm-5'>
           <div class ='col-sm-12 m-1 rounded light-bg p-1'>
-            <h1 class = 'display-4 m-1'>Rezga</h1>
-            <h3 class = 'm-1'>Email: <label class = 'text-info'>rezga.12@gmail.com</label></h3>
+            <h1 class = 'display-4 m-1'><%=userName %></h1>
             <h4 class = 'm-1'>Number Of Participations:</h4>
             <h4 class = 'm-1'>Number Of Creations:</h4>
           </div>

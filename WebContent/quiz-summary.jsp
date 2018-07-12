@@ -70,7 +70,7 @@
         <div class = 'col-sm-8'>
           <div class ='light-bg rounded m-1 p-1'>
             <h1 class = 'display-4 m-3'><%=quiz.getQuizName() %></h1>
-            <h3 class ='m-2'>Author: <label class ='text-info author'><%=quiz.authorUserName%></label></h3>
+            <h3 class ='m-2'>Author: <label class ='text-info author'><%=quiz.getAuthorUserName()%></label></h3>
             <h4 class = 'm-2'>Number of Questions: <%=quiz.getQuestionNumber() %></h4>
             <div class = 'm-2 lighter-bg rounded'>
               <h5><%=quiz.getQuizDescription() %></h5>
@@ -78,7 +78,7 @@
             <input type = 'hidden' id = 'start-path' value = '<%=request.getContextPath() + "/take-quiz.jsp?id=" + request.getParameter("id")%>'>
             <input type = 'hidden' id = 'edit-path' value = '<%=request.getContextPath() + "/edit-quiz.jsp?id=" + request.getParameter("id")%>'>
             <button class = 'btn btn-dark m-1 mr-3' id = 'start' ><h3>Start Quiz</h3></button>
-            <%if(db.getUserNameById(userId).equals(quiz.authorUserName)){ %>
+            <%if(db.getUserNameById(userId).equals(quiz.getAuthorUserName())){ %>
               <button class = 'btn btn-info m-1 ml-3' id = 'edit'><h3>Quiz Edition</h3></button>
             <%} %>
           </div>
