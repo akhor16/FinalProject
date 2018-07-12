@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import JavaClasses.Account;
 import JavaClasses.Quiz;
 import JavaClasses.QuizDatabase;
 import JavaClasses.StrPair;
@@ -46,7 +47,7 @@ public class CheckQuiz extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		String quizName = request.getParameter(TakeQuizConstants.QUIZ_NAME + "");
-		QuizDatabase base = new QuizDatabase();
+		QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 		Quiz quiz = base.getQuiz(quizName);
 		PrintWriter out = response.getWriter();
 		int points = 0;
@@ -89,6 +90,10 @@ public class CheckQuiz extends HttpServlet {
 			}
 			
 		}
+		int quizId = base.getQuizIdByName(quizName);
+		Account acc = (Account)request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME);
+		int userId = acc.getUserId();
+		base.addParticipation(quizId,userId,points);
 		out.println(points);
 		
 		

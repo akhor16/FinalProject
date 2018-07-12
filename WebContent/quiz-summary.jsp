@@ -1,3 +1,5 @@
+<%@page import="JavaClasses.StrPair"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="JavaClasses.Quiz"%>
 <%@page import="JavaClasses.Account" %>
 <%@page import="JavaClasses.QuizDatabase"%>
@@ -24,18 +26,18 @@
     <title>Summary</title>
 </head>
 <%
-		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
+	Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
   
-    String userName = "";
-		if(acc == null){
-			response.sendRedirect(request.getContextPath() + "/loginAndRegister.jsp");
-		}else{
+  String userName = "";
+  if(acc == null){
+		response.sendRedirect(request.getContextPath() + "/loginAndRegister.jsp");
+	}else{
 			
-			int userId = acc.getUserId();
-	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-	    userName = db.getUserNameById(userId);
-			
-		}
+		int userId = acc.getUserId();
+	  QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+	  userName = db.getUserNameById(userId);
+		int quizId = Integer.parseInt(request.getParameter("id"));
+		
 		
 %>
 <body class = 'bg'>
@@ -58,8 +60,8 @@
         </li>
       </ul>
     </nav>
-    <%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-    Quiz quiz = base.getQuiz(Integer.parseInt(request.getParameter("id")));
+    <%
+    Quiz quiz = db.getQuiz(Integer.parseInt(request.getParameter("id")));
     %>
     
     <div class = 'container-fluid mt-3'>
@@ -68,7 +70,7 @@
         <div class = 'col-sm-8'>
           <div class ='light-bg rounded m-1 p-1'>
             <h1 class = 'display-4 m-3'><%=quiz.getQuizName() %></h1>
-            <h3 class ='m-2'>Author: <label class ='text-info author'>Rezo</label></h3>
+            <h3 class ='m-2'>Author: <label class ='text-info author'><%=quiz.authorUserName%></label></h3>
             <h4 class = 'm-2'>Number of Questions: <%=quiz.getQuestionNumber() %></h4>
             <div class = 'm-2 lighter-bg rounded'>
               <h5><%=quiz.getQuizDescription() %></h5>
@@ -76,31 +78,32 @@
             <input type = 'hidden' id = 'start-path' value = '<%=request.getContextPath() + "/take-quiz.jsp?id=" + request.getParameter("id")%>'>
             <input type = 'hidden' id = 'edit-path' value = '<%=request.getContextPath() + "/edit-quiz.jsp?id=" + request.getParameter("id")%>'>
             <button class = 'btn btn-dark m-1 mr-3' id = 'start' ><h3>Start Quiz</h3></button>
-            <button class = 'btn btn-info m-1 ml-3' id = 'edit'><h3>Quiz Edition</h3></button>
+            <%if(db.getUserNameById(userId).equals(quiz.authorUserName)){ %>
+              <button class = 'btn btn-info m-1 ml-3' id = 'edit'><h3>Quiz Edition</h3></button>
+            <%} %>
           </div>
-          
-          <%for(int i=0;i<4;i++){ %>
+          <%ArrayList<StrPair> list = db.getParticipations(quizId, userId); %>
+          <%StrPair pair; %>
+          <%for(int i=0;i<list.size();i++){ %>
+            <%pair = list.get(i); %>
           <div class ='light-bg rounded m-1 mt-4 p-1 col-sm-10'>
-            <h3>You Scored 9 Points <label class = 'float-right'>DD/MM/YYYY</label> </h3>
+            <h3>You Scored <%=pair.getFirst()%>0 Points <label class = 'float-right text-secondary'><%=pair.getSecond()%></label> </h3>
           </div>
           <%} %>
         </div>
         <div class = 'col-sm-4'>
           <div class ='light-bg rounded m-1 p-1 text-center'>
-            <h3>Average Score: 67</h3>
+            <h3>Average Score: <%=db.getQuizAvgScore(quizId) %></h3>
           </div>
           
           <div class ='light-bg rounded m-1 mt-4 p-1'>
             <h3 class = 'text-center'>Top Performers</h3>
+            <%ArrayList<StrPair> topList = db.topScorers(quizId); %>
+            <%for(int i=0;i<topList.size();i++){ %>
             <div class ='border'>
-              <h4>Some dude <label class = 'float-right mr-3'>80</label></h4>
+              <h4><%= topList.get(i).getFirst() %><label class = 'float-right mr-3'><%=topList.get(i).getSecond() %>0</label></h4>
             </div>
-            <div class ='border'>
-              <h4>Some dude <label class = 'float-right mr-3'>70</label></h4>
-            </div>
-            <div class ='border'>
-              <h4>Some dude <label class = 'float-right mr-3'>60</label></h4>
-            </div>
+            <%} %>
           </div>
         </div>
         
@@ -108,6 +111,6 @@
       </div>
     
     </div>
-    
+ <%} %>
 </body>
 </html>

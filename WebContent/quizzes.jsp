@@ -75,7 +75,7 @@
 					<p class = 'rtl'>
 						<%int id = base.getQuizIdByName(names.get(i)); %>
 	    				<a class='h2 notify-label mb-1 text-dark' href="<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=id%>"><%=names.get(i) %></a>
-						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%= "ყველაზე მაგარი ავტორი"%> </a></p>
+						<p>Author: <a class = "notify-label mb-0 text-dark" href = "#"> <%=quiz.authorUserName%> </a></p>
 						<p>
 						 <div class="row a">
 							  <div class="column lef a">

@@ -25,6 +25,7 @@
     <script type="text/javascript"><%@include file="scripts/script.js"%></script>
     <title>Create Quiz</title>
 </head>
+
 <%
 		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
   

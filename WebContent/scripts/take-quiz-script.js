@@ -8,17 +8,17 @@ function postForm(){
 			$('#result').fadeIn(1000);
 		});
 	});
-	
-	
-	
-	
-	
 }
 
 
 $(document).ready(function(){
 	
 	$('#submit').click(postForm);
-	
+	$('#go-back').click(function(){
+		
+		var quizId = $('#quiz-id').val();
+		window.location.replace("quiz-summary.jsp?id=" + quizId);
+		
+	});
 	
 });

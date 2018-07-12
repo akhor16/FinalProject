@@ -115,7 +115,8 @@
           </form>
           <div class = 'result lighter-bg border rounded col-sm-12 mb-3 mt-3' id = 'result'>
             <h1 class = 'display-4'>you scored points</h1>
-            <button class = 'btn form-control btn-dark'>Get Back To Quiz Page</button>
+            <input type = 'hidden' id = 'quiz-id' value = '<%=id %>'>
+            <button class = 'btn form-control btn-dark' id = 'go-back'>Get Back To Quiz Page</button>
           </div>
       
           

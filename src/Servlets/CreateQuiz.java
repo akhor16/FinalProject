@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import JavaClasses.Account;
 import JavaClasses.CreateQuizConstants;
 import JavaClasses.Quiz;
 import JavaClasses.QuizDatabase;
@@ -54,8 +56,9 @@ public class CreateQuiz extends HttpServlet {
 		String quizDesc = request.getParameter(CreateQuizConstants.QUIZ_DESCRIPTION);
 		 
 		//Quiz quiz = new Quiz(quizName, quizDesc);
-		
-		base.addToBase(quizName, quizDesc);
+		HttpSession session = request.getSession();
+		Account acc = (Account)session.getAttribute(Account.SESSION_ATTRIBUTE_NAME);
+		base.addToBase(quizName, quizDesc,acc.getUserId());
 		
 		int numQuestions = Integer.parseInt(request.getParameter(CreateQuizConstants.QUESTION_NUM));
 		

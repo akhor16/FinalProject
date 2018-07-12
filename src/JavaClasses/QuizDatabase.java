@@ -44,14 +44,14 @@ public class QuizDatabase {
 		
 	}
 	
-	public void addToBase(String name, String description) {
+	public void addToBase(String name, String description, int authorId) {
 		
 		try {
 			Connection connection = getConnection();
 			Statement statement = connection.createStatement();
 			
 			statement.executeUpdate("insert into quizzes(quiz_name,description,author_id) "
-					+ "values('" + name + "','" + description + "',1)");
+					+ "values('" + name + "','" + description + "'," + authorId + ")");
 			
 			connection.close();
 			
@@ -218,6 +218,7 @@ public class QuizDatabase {
 	public Quiz getQuiz(String quizName) {
 		String desc = "";
 		String query = "select * from quizzes where quiz_name = \"" + quizName + "\"";
+		
 		int id = 0;
 		try {
 			Connection connection = getConnection();
@@ -227,7 +228,9 @@ public class QuizDatabase {
 			set.next();
 			desc = set.getString(4);
 			id = set.getInt(1);
+			String author = getUserNameById(set.getInt(3));
 			Quiz quiz = new Quiz(quizName,desc);
+			quiz.setAuthor(author);
 			set.close();
 
 			String questionsSql = "select * from questions where quiz_id = " + id;
@@ -743,5 +746,95 @@ public class QuizDatabase {
 		
 		
 	}
+	
+	public ArrayList<StrPair> getParticipations(int quizId, int userId){
+		
+		String sql = "select score, participation_date from participations where quiz_id = " + quizId 
+				+ " and user_id = " + userId + " order by id desc";
+		
+		ArrayList<StrPair> list = new ArrayList<>();
+		
+		Connection connection;
+		try {
+			connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			ResultSet set = statement.executeQuery(sql);
+			
+			while(set.next()) {
+				String score = set.getString(1);
+				String date = set.getString(2);
+				
+				list.add(new StrPair(score,date));
+			}
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
+	public double getQuizAvgScore(int quizId) {
+		
+		String sql = "select score from participations where quiz_id = " + quizId;
+		double result = 0;
+		double n = 0;
+		
+		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			ResultSet set = statement.executeQuery(sql);
+			
+			while(set.next()) {
+				n++;
+				result = result + set.getInt(1) * 10;
+			}
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(n>0) {
+			result = result / n;
+		}
+		
+		return result;
+		
+	}
+	
+	public ArrayList<StrPair> topScorers(int quizId){
+		
+		String sql = "select user_id, score from participations where quiz_id = " + quizId + " order by score desc";
+		ArrayList<StrPair> list = new ArrayList<>();
+		try {
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+			
+			ResultSet set = statement.executeQuery(sql);
+			
+			while(set.next()) {
+				int userId = set.getInt(1);
+				String userName = getUserNameById(userId);
+				list.add(new StrPair(userName,set.getString(2)));
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
 	
 }
