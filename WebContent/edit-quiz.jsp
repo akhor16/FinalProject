@@ -70,9 +70,9 @@
 
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
-        <div class = 'col-sm-2 border'>asd</div>
+        <div class = 'col-sm-2'></div>
 
-        <div class = 'col-sm-8 border'>
+        <div class = 'col-sm-8'>
           <form action = 'EditQuiz' method = 'POST'>
             <div class = 'lighter-bg border rounded col-sm-12'>
               <h2 class = 'm-2 display-4'> Editing Quiz: </h2>
@@ -199,7 +199,7 @@
           </form>
         </div>
         
-        <div class = 'col-sm-2 border'> </div>
+        <div class = 'col-sm-2'> </div>
 
       </div>
 
