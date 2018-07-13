@@ -29,16 +29,16 @@
 		if(acc == null){
 			RequestDispatcher rd = request.getRequestDispatcher("loginAndRegister.jsp");
 			rd.forward(request, response);
-		}
+		} else {
 		int userId = acc.getUserId();
-		QuizDatabase db = new QuizDatabase();
-		String loginUserName = db.getUserNameById(userId);
+		 QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+		String loginUserName = base.getUserNameById(userId);
 		String quizId = request.getParameter("id"); 
 	    if(quizId == null){
 	    	RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
 			rd.forward(request, response);
 	    }
-	    QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+	   
 	    int id = Integer.parseInt(quizId);
 	    Quiz quiz = base.getQuiz(id);%>  
 <body class = 'bg'>
@@ -140,3 +140,4 @@
   </body>
 
 </html>
+<%}%>
