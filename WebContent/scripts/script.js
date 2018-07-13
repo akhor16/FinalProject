@@ -87,6 +87,30 @@ function newEnumeration(current){
 	
 }
 
+
+
+function findQuiz(){
+	
+	
+	var quizName = $('#input-quizname').val();
+	$.post("FindQuiz",{name: quizName},function(data, status){
+		
+		if(data == "0"){
+			
+			$('.first-stage').fadeOut(1000,function(){
+				$('.second-stage').fadeIn(1000);
+			});
+		}else{
+			
+			$('#same-name').fadeIn();
+			$('#input-quizname').addClass('warning');
+		}
+		
+	});
+	
+	
+}
+
 /**
  * this method here is called after click on continue button
  * it checks if everything is all right with title and description of
@@ -98,9 +122,7 @@ function switchStages(){
 	
 	clicked = true;
 	if(titleChecker() && descriptionChecker()){
-		$('.first-stage').fadeOut(1000,function(){
-			$('.second-stage').fadeIn(1000);
-		});
+		findQuiz();
 		
 	}else{
 		if(!titleChecker()){
@@ -308,6 +330,8 @@ function checkQuestionTypes(){
 	
 }
 
+
+
 /*
  * this function is launched after the DOM elements are loaded successfully
  * and are ready for JQuery code to change them.
@@ -318,7 +342,10 @@ $(document).ready(function(){
 	$('#continue-btn').click(switchStages);
 	
 	//key up events for quiz name input field and description textareas
-	$('#input-quizname').keyup(function(){ checkInput($(this),titleChecker); });
+	$('#input-quizname').keyup(function(){ 
+		checkInput($(this),titleChecker); 
+		$('#same-name').fadeOut();
+	});
 	
 	$('#quiz-desc').keyup(function(){ checkInput($(this),descriptionChecker); });	
 
@@ -326,7 +353,7 @@ $(document).ready(function(){
 	$('#plus-btn').click(addAnswerField);
 
 	$('.minus-btn').click(removeAnswerField);
- 
+	
 	//changing quiz type with select menu
 	$('#select').change(changeQuestionType);
 	

@@ -89,7 +89,7 @@
               <button class = 'btn btn-info m-1 ml-3' id = 'edit'><h3>Quiz Edition</h3></button>
             <%} %>
           </div>
-          <%ArrayList<StrPair> list = db.getParticipations(quizId, userId); %>
+          <%ArrayList<StrPair> list = db.getParticipations(quizId, userId,false); %>
           <%StrPair pair; %>
           <%for(int i=0;i<list.size();i++){ %>
             <%pair = list.get(i); %>

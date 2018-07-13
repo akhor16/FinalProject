@@ -48,8 +48,11 @@ public class CheckQuiz extends HttpServlet {
 		//doGet(request, response);
 		String quizName = request.getParameter(TakeQuizConstants.QUIZ_NAME + "");
 		QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-		Quiz quiz = base.getQuiz(quizName);
 		PrintWriter out = response.getWriter();
+		
+		
+		Quiz quiz = base.getQuiz(quizName);
+		
 		int points = 0;
 		for(int i=0;i<quiz.getQuestionNumber();i++) {
 			

@@ -37,10 +37,8 @@
 			int userId = acc.getUserId();
 	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 	    userName = db.getUserNameById(userId);
-			
-		
-		
-	%>
+
+%>
 <body class = 'bg'>
     <nav class="navbar navbar-expand-lg navbar-light light-bg">
       <div><a class="navbar-brand border border-secondary rounded non-transparent" href="homepage.jsp"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>
@@ -72,6 +70,7 @@
 	            <div class ='row m-1'>
 	              <input type="text" name = '<%=CreateQuizConstants.QUIZ_NAME%>' class="form-control light-bg login-input" placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
 	              <small class = 'red-small' id = 'min-limit'>sorry, but you should enter longer name</small>
+	              <small class = 'red-small' id = 'same-name'>Sorry but quiz with the same name already exists</small>
 	               
 	            </div>
 	
@@ -79,15 +78,6 @@
 	              <textarea name = '<%=CreateQuizConstants.QUIZ_DESCRIPTION%>' class="form-control light-bg login-input " placeholder="Quiz Description" rows="6" cols="50" maxlength="550" id ='quiz-desc'></textarea>
 	              <small class = 'red-small' id = 'desc-limit'>sorry but you should enter more description</small>
 	            </div>
-	
-	            <select name = '<%=CreateQuizConstants.TIME_LIMIT%>' class="form-control login-input" id="sel1" placeholder = 'Select Time'>
-	              <option value = '1'>No Time Limit (Click To Choose)</option>
-	              <option value = '2'>10 min</option>
-	              <option value = '3'>15 min</option>
-	              <option value = '4'>20 min</option>
-	              <option value = '4'>30 min</option>
-	              <option value = '4'>45 min</option>
-	            </select>
 	
 	            <button type="button" class="btn btn-dark m-3"  id = 'continue-btn'> Continue >> </button>
 	            <button type="button" class="btn btn-danger m-3" onclick="location.href = 'homepage.jsp';" id = 'an'> Cancel </button>

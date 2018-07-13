@@ -337,7 +337,7 @@ public class QuizDatabase {
 	public ArrayList<String> getQuizNames(){
 		
 		ArrayList<String> result = new ArrayList<>();
-		String sql = "select quiz_name from quizzes";
+		String sql = "select quiz_name from quizzes order by quiz_id desc";
 		ResultSet set;
 		try {
 			Connection connection = getConnection();
@@ -371,8 +371,14 @@ public class QuizDatabase {
 			Statement statement = connection.createStatement();
 			
 			ResultSet set = statement.executeQuery(sql);
-			set.next();
-			int result = set.getInt(1);
+			boolean isNull= !set.next();
+			int result;
+			if(isNull) {
+				result = -1;
+			}else {
+				result = set.getInt(1);
+			}
+			
 			
 			connection.close();
 			
@@ -396,6 +402,7 @@ public class QuizDatabase {
 			
 			ResultSet set = statement.executeQuery(sql);
 			set.next();
+			
 			String result = set.getString(1);
 			
 			connection.close();
@@ -788,10 +795,16 @@ public class QuizDatabase {
 		
 	}
 	
-	public ArrayList<StrPair> getParticipations(int quizId, int userId){
+	
+	
+	public ArrayList<StrPair> getParticipations(int quizId, int userId,boolean all){
 		
 		String sql = "select score, participation_date from participations where quiz_id = " + quizId 
 				+ " and user_id = " + userId + " order by id desc";
+		
+		if(all) {
+			sql = "select user_id, score from participations order by id desc";
+		}
 		
 		ArrayList<StrPair> list = new ArrayList<>();
 		

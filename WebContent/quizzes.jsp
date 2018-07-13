@@ -70,7 +70,7 @@
 			<%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 			ArrayList<String> names = base.getQuizNames();
 			%>
-				<% for(int i = 0; i < names.size(); i++) { %>
+				<% for(int i = 0; i < names.size(); i++) { %> 
 				  <%Quiz quiz = base.getQuiz(names.get(i)); %>
 				<div class="m-3 light-bg border rounded"> 
 					<div class='m-1'>
