@@ -152,7 +152,7 @@
                   <tr class ='lighter-bg quizz-list-item'>
                     <td>
                       <h6><%=db.getUserNameById(intId)%></h6>
-                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info"><%=list.get(i).getSecond() %></span> points in a quiz</p>
+                      <p class = 'm-0 text-secondary'>scored <span class="badge badge-info"><%=list.get(i).getSecond() %>0</span> points in a quiz</p>
                     </td>
                   </tr>
                   <%} %>

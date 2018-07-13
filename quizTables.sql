@@ -75,3 +75,101 @@ create table participations(
     score int unsigned not null,
     participation_date datetime default now()
 );
+
+
+insert into users(first_name,last_name,user_name,hash_password)
+  values('revaz', 'meishvili', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a');
+    
+insert into quizzes(quiz_name,author_id,description) 
+  values('First Ever Quiz',1,"This Is First EVer Quiz Description");
+
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"Answer This question",0,1);
+    
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (1,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (1,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (1,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (1,"correct choice",1);
+    
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"Answer This question",1,1);
+    
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (2,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (2,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (2,"correct choice",1);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (2,"Wrong choice",0);
+
+    
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"Answer This question",2,1);
+    
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (3,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (3,"correct choice",1);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (3,"Wrong choice",0);
+insert into multiple_choice_answers(question_id,choice,correct)
+  values (3,"Wrong choice",0);
+
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"What is Capital Of England",3,0);
+    
+insert into open_ended_answers(question_id,answer)
+  values(4,'London');
+    
+
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"What is 2*2",4,0);
+    
+insert into open_ended_answers(question_id,answer)
+  values(5,'4');
+    
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"What is oposite of good",5,0);
+    
+insert into open_ended_answers(question_id,answer)
+  values(6,'bad');
+
+
+insert into questions(quiz_id,description,ind,question_type)
+  values(1,"match theese",6,2);
+
+insert into matching_answers(question_id,match_key,match_value)
+  values(7,'one','1');
+insert into matching_answers(question_id,match_key,match_value)
+  values(7,'two','2');
+insert into matching_answers(question_id,match_key,match_value)
+  values(7,'three','3');
+insert into matching_answers(question_id,match_key,match_value)
+  values(7,'four','4');
+
+
+
+insert into quizzes(quiz_name,author_id,description) 
+  values('matching quiz',1,"matching quiz description");
+
+insert into questions(quiz_id,description,ind,question_type)
+  values(2,"capital of london is ((England))",0,3);
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(2,"capital of ((England)) is ((London))",1,3);
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(2,"capital of ((England)) is ((London))",2,3);
+    
+insert into questions(quiz_id,description,ind,question_type)
+  values(2,"((Capital)) of ((England)) is ((London))",3,3);
+
