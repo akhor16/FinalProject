@@ -43,10 +43,10 @@
       <div class = ' ml-3'>
         <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#demo">
           Notifications 
-          <span class="text-center badge badge-light badge-pill ml-1">1</span>
-        </button>
-        <%ArrayList<String> names = db.getQuizNames(); %>
+          <%ArrayList<String> names = db.getQuizNames(); %>
         <%int nameNum = Math.min(5,names.size()); %>
+          <span class="text-center badge badge-light badge-pill ml-1"><%=nameNum %></span>
+        </button>
         <div id="demo" class="collapse abs-position border border-secondary rounded col-sm-3 black-bg">
           <%for(int i=0;i<nameNum;i++){ %>
           <a href = '<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=db.getQuizIdByName(names.get(i))%>'><div class = 'mt-1 mb-2 notify-item rounded p-2'>
@@ -96,7 +96,7 @@
                 <%int quantity = Math.min(quizNames.size(), 5); %>
                 <%for(int i=0;i<quantity;i++){ %>
                   <tr class ='lighter-bg quizz-list-item'>
-                    <td><h6><%=quizNames.get(i)%></h6></td>
+                    <td><h6><a href = "quiz-summary.jsp?id=<%=db.getQuizIdByName(quizNames.get(i)) %>"> <%=quizNames.get(i)%> </a></h6></td>
                     <td><span class="text-center badge badge-secondary badge-pill">1 day</span></td>
                   </tr>
                 <%} %>         
@@ -151,8 +151,10 @@
                   <%int intId = Integer.parseInt(strId); %>
                   <tr class ='lighter-bg quizz-list-item'>
                     <td>
+                    <a href = "user-profile.jsp?id=<%=intId%>">
                       <h6><%=db.getUserNameById(intId)%></h6>
                       <p class = 'm-0 text-secondary'>scored <span class="badge badge-info"><%=list.get(i).getSecond() %>0</span> points in a quiz</p>
+                      </a>
                     </td>
                   </tr>
                   <%} %>
