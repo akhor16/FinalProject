@@ -38,7 +38,7 @@
 	    	RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
 			rd.forward(request, response);
 	    }
-	   
+	   String userName = base.getUserNameById(userId);
 	    int id = Integer.parseInt(quizId);
 	    Quiz quiz = base.getQuiz(id);%>  
 <body class = 'bg'>
@@ -52,19 +52,19 @@
         <li class="nav-item  hover-shadow">
           <a class="nav-link" href="<%=request.getContextPath()%>/quizzes.jsp" id = 'about'><h4 class="ml-3 mr-3 mb-auto mt-auto">Quizzes</h4> </a>
         </li>
-        <li class="nav-item  hover-shadow">
-          <a class="nav-link" href="#" id ='login'><h4 class="ml-3 mr-3 mb-auto mt-auto">Profile</h4></a>
-        </li>
-        <li class="nav-item  hover-shadow">
-          <a class="nav-link" href="#" id = 'register'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
-        </li>
+       <li class="nav-item  hover-shadow">
+	        <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp?id=<%=userId %>"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+	      </li>
+	      <li class="nav-item  hover-shadow">
+	        <a class="nav-link" href="LogoutServlet?method=get" id = 'logout'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
+	      </li>
       </ul>
     </nav>
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
-        <div class = 'col-sm-2 border'>asd</div>
+        <div class = 'col-sm-2'></div>
 
-        <div class = 'col-sm-8 border'>
+        <div class = 'col-sm-8'>
           
           <div class = 'lighter-bg border rounded col-sm-12 mb-3 mt-3'>
             <h1 class = 'word-wrap text-center'><%=quiz.getQuizName() %></</h1>
@@ -134,7 +134,7 @@
       
           
         </div>
-        <div class = 'col-sm-2 border'>asd</div>
+        <div class = 'col-sm-2'></div>
       </div>
     </div>
   </body>
