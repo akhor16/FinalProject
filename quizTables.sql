@@ -75,6 +75,3 @@ create table participations(
     score int unsigned not null,
     participation_date datetime default now()
 );
-
-use quizWebsite;
-select * from users;

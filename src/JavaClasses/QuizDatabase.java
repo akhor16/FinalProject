@@ -212,7 +212,7 @@ public class QuizDatabase {
 	}
 	
 	/*
-	 * this method isn't fully implemented yet man
+	 * 
 	 * 
 	 */
 	public Quiz getQuiz(String quizName) {
@@ -274,7 +274,9 @@ public class QuizDatabase {
 		return null;
 	}
 	
-	
+	/*
+	 * 
+	 */
 	private ArrayList<String> getOpenAnswers(ResultSet set) throws SQLException{
 		ArrayList<String> result = new ArrayList<>();
 		while(set.next()) {
@@ -284,6 +286,9 @@ public class QuizDatabase {
 		return result;
 	}
 	
+	/*
+	 * 
+	 */
 	private ArrayList<String> getMultipleChoiceAnswers(ResultSet set) throws SQLException{
 		
 		ArrayList<String> result = new ArrayList<>();
@@ -294,6 +299,9 @@ public class QuizDatabase {
 		return result;
 	}
 	
+	/*
+	 * 
+	 */
 	private int getCorrectIndex(ResultSet set) throws SQLException {
 		int index = 0;
 		while(set.next()) {
@@ -306,6 +314,9 @@ public class QuizDatabase {
 		return -1;
 	}
 	
+	/*
+	 * 
+	 */
 	private ArrayList<StrPair> getMatchingPairs(ResultSet set) throws SQLException{
 		
 		ArrayList<StrPair> matches = new ArrayList<>();
@@ -319,6 +330,10 @@ public class QuizDatabase {
 		
 	}
 	
+	/**
+	 * 
+	 * @return ArrayList of all quiz names
+	 */
 	public ArrayList<String> getQuizNames(){
 		
 		ArrayList<String> result = new ArrayList<>();
@@ -343,6 +358,11 @@ public class QuizDatabase {
 		
 	}
 	
+	/**
+	 * 
+	 * @param name - quiz name
+	 * @return quiz id for the given quiz name
+	 */
 	public int getQuizIdByName(String name) {
 		
 		String sql = "select quiz_id from quizzes where quiz_name = '" + name + "'";
@@ -364,6 +384,9 @@ public class QuizDatabase {
 		return 0;
 	}
 	
+	/*
+	 * 
+	 */
 	private String getQuizNamebyId(int id) {
 		
 		String sql = "select quiz_name from quizzes where quiz_id = " + id;
@@ -498,27 +521,45 @@ public class QuizDatabase {
 
 	/**
 	 * 
-	 * @param userId
-	 * @return ArrayList of quiz IDs which the given user has taken
+	 * @param userId user ID
+	 * @return number of created quizzes
 	 */
-	public ArrayList<String> getTakenQuizzesIDs(int userId) {
-		ArrayList<String> takenQuizzes = new ArrayList<String>();
+	public int getCreatedQuizzesNum(int userId) {
+		return getCreatedQuizzesIDs(userId).size();
+	}
+	
+	/**
+	 * 
+	 * @param userId
+	 * @return ArrayList of StrPairs of quiz IDs and scores which the given user has taken
+	 */
+	public ArrayList<StrPair> getTakenQuizzesIDs(int userId) {
+		ArrayList<StrPair> takenQuizzes = new ArrayList<>();
 		// Taken quizzes
-		String takenQuizzesQuery = "(select quiz_id from quizzes inner join participations on (participations.user_id = "
-				+ userId + "AND participations.user_id = quizzes.author_id)";
+		String takenQuizzesQuery = "select quiz_id, score from participations where user_id = "
+				+ userId;
 		try {
 			Connection connection = getConnection();
 			Statement statement = connection.createStatement();
 			
 			ResultSet rs = statement.executeQuery(takenQuizzesQuery);
 			while (rs.next()) {
-				takenQuizzes.add(rs.getString(1));
+				takenQuizzes.add(new StrPair(rs.getString(1), rs.getString(2)));
 			}
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return takenQuizzes;
+	}
+	
+	/**
+	 * 
+	 * @param userId user id
+	 * @return number of taken quizzes
+	 */
+	public int getTakenQuizzesNum(int userId) {
+		return getTakenQuizzesIDs(userId).size();
 	}
 	
 	/**

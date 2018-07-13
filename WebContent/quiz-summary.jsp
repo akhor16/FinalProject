@@ -28,15 +28,20 @@
 <%
 	Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
   
-  String userName = "";
+  String userName;
+  String quizIdStr = request.getParameter("id");
   if(acc == null){
 		response.sendRedirect(request.getContextPath() + "/loginAndRegister.jsp");
+	} else if(quizIdStr == null){
+		response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 	}else{
+	
 			
 		int userId = acc.getUserId();
 	  QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 	  userName = db.getUserNameById(userId);
-		int quizId = Integer.parseInt(request.getParameter("id"));
+	  
+		int quizId = Integer.parseInt(quizIdStr);
 		
 		
 %>
@@ -53,7 +58,7 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/quizzes.jsp" id = 'about'><h4 class="ml-3 mr-3 mb-auto mt-auto">Quizzes</h4> </a>
         </li>
 	    <li class="nav-item  hover-shadow">
-	      <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+	      <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp?id=<%=userId %>"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
 	    </li>
 	    <li class="nav-item  hover-shadow">
 	      <a class="nav-link" href="LogoutServlet?method=get" id = 'logout'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>

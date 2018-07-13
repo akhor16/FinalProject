@@ -1,5 +1,6 @@
 <%@page import="JavaClasses.QuizDatabase"%>
 <%@page import="JavaClasses.TakeQuizConstants"%>
+<%@page import="JavaClasses.Account"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JavaClasses.Quiz"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,6 +24,23 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Taking A Quizz</title>
 </head>
+<%
+		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
+		if(acc == null){
+			RequestDispatcher rd = request.getRequestDispatcher("loginAndRegister.jsp");
+			rd.forward(request, response);
+		}
+		int userId = acc.getUserId();
+		QuizDatabase db = new QuizDatabase();
+		String loginUserName = db.getUserNameById(userId);
+		String quizId = request.getParameter("id"); 
+	    if(quizId == null){
+	    	RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+			rd.forward(request, response);
+	    }
+	    QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+	    int id = Integer.parseInt(quizId);
+	    Quiz quiz = base.getQuiz(id);%>  
 <body class = 'bg'>
     <nav class="navbar navbar-expand-lg navbar-light light-bg">
       <div><a class="navbar-brand border border-secondary rounded non-transparent" href="homepage.jsp"><p class="ml-1 mr-1 mb-auto mt-auto">Quiz Website</p></a></div>
@@ -42,11 +60,6 @@
         </li>
       </ul>
     </nav>
-     
-    <%String quizId = request.getParameter("id"); %> 
-    <%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME); %>
-    <%int id = Integer.parseInt(quizId); %>
-    <%Quiz quiz = base.getQuiz(id);%>  
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
         <div class = 'col-sm-2 border'>asd</div>

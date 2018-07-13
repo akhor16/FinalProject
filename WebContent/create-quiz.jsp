@@ -38,7 +38,7 @@
 	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
 	    userName = db.getUserNameById(userId);
 			
-		}
+		
 		
 	%>
 <body class = 'bg'>
@@ -53,7 +53,7 @@
           <a class="nav-link" href="<%=request.getContextPath()%>/quizzes.jsp" id = 'about'><h4 class="ml-3 mr-3 mb-auto mt-auto">Quizzes</h4> </a>
         </li>
         <li class="nav-item  hover-shadow">
-          <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+          <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp?id=<%=userId %>"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
         </li>
         <li class="nav-item  hover-shadow">
           <a class="nav-link" href="LogoutServlet?method=get" id = 'logout'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
@@ -90,7 +90,7 @@
 	            </select>
 	
 	            <button type="button" class="btn btn-dark m-3"  id = 'continue-btn'> Continue >> </button>
-	            <button type="button" class="btn btn-danger m-3" id = 'an'> Cancel :( </button>
+	            <button type="button" class="btn btn-danger m-3" onclick="location.href = 'homepage.jsp';" id = 'an'> Cancel </button>
 	
 	          </div>
 	          
@@ -182,7 +182,7 @@
 		
 		          <div class = 'lighter-bg border rounded col-sm-12 mt-3 mb-3'>
 		            <input id = 'sbm' type = 'submit' class = 'btn btn-dark m-3' value = 'Submit Quiz!'>
-		            <button class = 'btn btn-danger m-3'>Cancel lol</button>
+		            <button class = 'btn btn-danger m-3' onclick="location.href = 'homepage.jsp';">Cancel</button>
 		            <small class = 'red-small' id = 'null-inputs'>You Should Fill All The Fields</small>
 		          </div>
 		          
@@ -208,3 +208,4 @@
 
   </body>
 </html>
+<%}%>

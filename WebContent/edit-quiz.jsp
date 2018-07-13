@@ -10,7 +10,9 @@
 <head>
 <!-- Bootstrap CSS -->
     <!-- We Will Be Using Bootstrap Framework For The Front End Of This Project -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" 
+    crossorigin="anonymous">
     
     <!-- Bootstrap is using JQuery and bootstrap.js aswell so i include their cdn-s -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -30,16 +32,20 @@
 <%
 		Account acc = (Account)(request.getSession().getAttribute(Account.SESSION_ATTRIBUTE_NAME));
   
-    String userName = "";
+    	String userName;
+    	String idStr = request.getParameter("id");
 		if(acc == null){
 			response.sendRedirect(request.getContextPath() + "/loginAndRegister.jsp");
-		}else{
+		} else if (idStr == null){
+			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
+		} else{
 			
 			int userId = acc.getUserId();
-	    QuizDatabase db = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-	    userName = db.getUserNameById(userId);
+	    QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
+	    userName = base.getUserNameById(userId);
 			
-		}
+	    int id = Integer.parseInt(idStr);
+	    Quiz quiz = base.getQuiz(id);
 		
 	%>
 <body class = 'bg'>
@@ -61,10 +67,6 @@
       </li>
       </ul>
     </nav>
-    <%QuizDatabase base = (QuizDatabase)request.getServletContext().getAttribute(QuizDatabase.ATTRIBUTE_NAME);
-    int id = Integer.parseInt(request.getParameter("id"));
-    Quiz quiz = base.getQuiz(id);
-    %>
 
     <div class = 'container-fluid mt-3'>
       <div class = 'row justify-content-center'>
@@ -214,3 +216,4 @@
 
   </body>
 </html>
+<%}%>

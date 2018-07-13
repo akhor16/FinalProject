@@ -1,7 +1,8 @@
 <%@page import="sun.security.pkcs11.Secmod.DbMode"%>
 <%@page import="JavaClasses.Quiz"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="JavaClasses.Account, JavaClasses.QuizDatabase"%>
+<%@page import="JavaClasses.Account"%> 
+<%@page import="JavaClasses.QuizDatabase"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,7 +56,7 @@
 		<li class="nav-item hover-shadow"><a class="nav-link" href="<%=request.getContextPath()%>/homepage.jsp"
 			id='home'><h4 class="ml-3 mr-3 mb-auto mt-auto">Home</h4> </a></li>
 		<li class="nav-item  hover-shadow">
-	        <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
+	        <a class="nav-link" href="<%=request.getContextPath()%>/user-profile.jsp?id=<%=userId %>"><h4 class="ml-3 mr-3 mb-auto mt-auto h"><%=userName %></h4></a>
 	      </li>
 	      <li class="nav-item  hover-shadow">
 	        <a class="nav-link" href="LogoutServlet?method=get" id = 'logout'><h5 class="ml-3 mr-3 mb-auto mt-auto">Log Out</h5> </a>
@@ -76,14 +77,12 @@
 					<p class = 'rtl'>
 						<%int id = base.getQuizIdByName(names.get(i)); %>
 	    				<a class='h2 notify-label mb-1 text-dark' href="<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=id%>"><%=names.get(i) %></a>
-						<p>Author: <a class = "notify-label mb-0 text-dark" href = "user-profile.jsp?id="<%=userId %>> <%= quiz.getAuthorUserName()%> </a></p>
+						<p>Author: <a class = "notify-label mb-0 text-dark" href = "user-profile.jsp?id=<%=db.getUserIdByName(quiz.getAuthorUserName()) %>">
+						 <%= quiz.getAuthorUserName()%> </a></p>
 						<p>
 						 <div class="row a">
 							  <div class="column lef a">
 							 	 Question Num: <%=quiz.getQuestionNumber() %>
-							  </div>
-							  <div class="column cen a">
-							  	Duration: <%=60 %> min
 							  </div>
 							  <div class="column rig a">
 							  	<a class = 'notify-label mb-0 text-dark' href = "<%=request.getContextPath()%>/quiz-summary.jsp?id=<%=id%>">Take a Quiz >> </a>

@@ -53,7 +53,7 @@
 					</div>
 
 					<div>
-						<small class='red-small' id='wrongLogin'>sorry but you
+						<small class='red-small' id='wrongLogin'>You
 							entered wrong user name or password</small>
 					</div>
 					<div>
@@ -73,12 +73,12 @@
 						<div>
 
 							<div class="form-group col-sm-6">
-								<input type="text" class="form-control" id="nameRegister"
+								<input type="text" onfocus="fadeOutRedTexts()" class="form-control" id="nameRegister"
 									placeholder="Enter Name">
 							</div>
 
 							<div class="form-group col-sm-6">
-								<input type="text" class="form-control" id="lastNameRegister"
+								<input type="text" onfocus="fadeOutRedTexts()" class="form-control" id="lastNameRegister"
 									placeholder="Enter Last Name">
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 
 					<div class="form-group">
 						<label for="userNameRegister">User name</label> <input
-							type="text" class="form-control" id="userNameRegister"
+							type="text" onfocus="fadeOutRedTexts()" class="form-control" id="userNameRegister"
 							placeholder="Enter user name">
 					</div>
 
@@ -99,23 +99,36 @@
 						<div class="form-group">
 							<div>
 								<div class="form-group col-sm-6">
-									<input type="password" data-minlength="6" class="form-control"
+									<input type="password" onfocus="fadeOutRedTexts()" data-minlength="6" class="form-control"
 										id="passwordRegister" placeholder="Password" required>
-									<div class="help-block">Minimum of 6 characters</div>
+									
 								</div>
 								<div class="form-group col-sm-6">
-									<input type="password" class="form-control"
+									<input type="password" onfocus="fadeOutRedTexts()" class="form-control"
 										id="passwordRegisterConfirm" data-match="#inputPassword"
 										data-match-error="Didn't Match" placeholder="Confirm" required>
 									<div class="help-block with-errors"></div>
 								</div>
 							</div>
+							<div>
+								<small class='red-small' id='passDidntMatch'>Those passwords did not match. Try again.
+								</small>
+							</div>
+							<div>
+								<small class='red-small' id='passMinLen'>Use 6 characters or more for your password
+								</small>
+							</div>
 						</div>
 					</div>
+					
 					<div>
-						<small class='red-small' id='wrongRegister'>sorry but the user name you entered is already in use</small>
+						<small class='red-small' id='fillAllFieldsRegister'>Please fill all the fields in
+						</small>
 					</div>
-					<div class="clearfix msB">
+					<div>
+						<small class='red-small' id='wrongRegister'>The user name you entered is already in use</small>
+					</div>
+					<div >
 						<button type="button" id="registerButton"
 							class="btn border border-secondary hover-button">Create
 							An Account</button>
