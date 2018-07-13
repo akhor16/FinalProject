@@ -11,7 +11,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Bootstrap CSS -->
     <!-- We Will Be Using Bootstrap Framework For The Front End Of This Project -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" 
+    crossorigin="anonymous">
     
     <!-- Bootstrap is using JQuery and bootstrap.js aswell so i include their cdn-s -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -75,7 +77,7 @@
         <div class = 'col-sm-8'>
           <div class ='light-bg rounded m-1 p-1'>
             <h1 class = 'display-4 m-3'><%=quiz.getQuizName() %></h1>
-            <h3 class ='m-2'>Author: <label class ='text-info author'><%=quiz.getAuthorUserName()%></label></h3>
+            <h3 class ='m-2'>Author: <label class ='text-info author'> <a href="user-profile.jsp?id=<%=db.getUserIdByName(quiz.getAuthorUserName()) %>"><%=quiz.getAuthorUserName()%> </a></label></h3>
             <h4 class = 'm-2'>Number of Questions: <%=quiz.getQuestionNumber() %></h4>
             <div class = 'm-2 lighter-bg rounded'>
               <h5><%=quiz.getQuizDescription() %></h5>
