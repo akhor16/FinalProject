@@ -19,9 +19,9 @@ function titleChecker(){
 	var count = 0;
 	for(i=0;i<input.length;i++){
 		var char = input.charAt(i);
-		if(char >= 'a' && char <= 'z' || char >= 'A' && char <='Z'){
+		//if(char >= 'a' && char <= 'z' || char >= 'A' && char <='Z'){
 			count++;
-		}
+		//}
 	}
 	
 	if(count >= 8){
