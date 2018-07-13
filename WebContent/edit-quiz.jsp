@@ -77,7 +77,7 @@
             <div class = 'lighter-bg border rounded col-sm-12'>
               <h2 class = 'm-2 display-4'> Editing Quiz: </h2>
               <div class ='row m-1'>
-                <input type="text" name = '<%=CreateQuizConstants.QUIZ_NAME%>' class="form-control light-bg login-input" value = '<%=quiz.getQuizName() %>' placeholder="Quiz Name" maxlength="61" id ='input-quizname'>
+                <input type="text" name = '<%=CreateQuizConstants.QUIZ_NAME%>' class="form-control light-bg login-input" value = '<%=quiz.getQuizName() %>' placeholder="Quiz Name" maxlength="61" id ='input-quizname' disabled>
                 <input type = 'hidden' name = 'quiz-id' value = '<%=id%>'>
                 <small class = 'red-small' id = 'min-limit'>sorry, but you should enter longer name</small>
                  
